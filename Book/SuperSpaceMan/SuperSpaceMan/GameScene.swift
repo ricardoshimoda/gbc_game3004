@@ -39,6 +39,20 @@ class GameScene: SKScene {
         playerNode3.position = CGPoint(x:size.width/2.0,y:120.0)
         playerNode3.name = "ThirdPlayer"
         addChild(playerNode3)
+        
+        let referenceToFirstPlayer = childNode(withName:"FtPlayer")
+        if let realReference = referenceToFirstPlayer {
+            print("Got it!")
+            print(realReference)
+        }
+        else{
+            print("Are you mad?")
+        }
+        
+        enumerateChildNodes(withName: "FirstPlayer") { (node,whoa) in
+            print("Enumerating all FirstPlayers")
+            print(node)
+        }
 
     }
 }
