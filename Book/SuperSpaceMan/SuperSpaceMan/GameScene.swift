@@ -10,7 +10,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     let backgroundNode = SKSpriteNode(imageNamed:"Background")
-    let playerNode = SKSpriteNode(imageNamed:"Player")
+    //let playerNode = SKSpriteNode(imageNamed:"Player")
     /* For now we're only going to have the initialization functions */
     required init?(coder aDecoder : NSCoder){
         super.init(coder: aDecoder)
@@ -23,7 +23,22 @@ class GameScene: SKScene {
         backgroundNode.position = CGPoint(x:size.width/2.0,y:0.0)
         addChild(backgroundNode)
         
-        playerNode.position = CGPoint(x:size.width/2.0,y:80.0)
-        addChild(playerNode)
+        //playerNode.position = CGPoint(x:size.width/2.0,y:80.0)
+        //addChild(playerNode)
+        let playerNode1 = SKSpriteNode(imageNamed: "Player")
+        playerNode1.position = CGPoint(x:size.width/2.0,y:80.0)
+        playerNode1.name = "FirstPlayer"
+        addChild(playerNode1)
+
+        let playerNode2 = SKSpriteNode(imageNamed: "Player")
+        playerNode2.position = CGPoint(x:size.width/2.0,y:100.0)
+        playerNode2.name = "SecondPlayer"
+        addChild(playerNode2)
+        
+        let playerNode3 = SKSpriteNode(imageNamed: "Player")
+        playerNode3.position = CGPoint(x:size.width/2.0,y:120.0)
+        playerNode3.name = "ThirdPlayer"
+        addChild(playerNode3)
+
     }
 }
