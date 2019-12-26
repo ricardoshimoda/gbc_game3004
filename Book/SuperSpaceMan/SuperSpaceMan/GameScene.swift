@@ -28,6 +28,9 @@ class GameScene: SKScene {
     // Using the accelerometer
     let coreMotionManager = CMMotionManager()
     
+    // Particle
+    var engineExaust: SKEmitterNode?
+    
     //var playerSpeed:CGFloat = 200
     //var previousTime:Double = 0
     //var frameCounter = 1
@@ -70,32 +73,14 @@ class GameScene: SKScene {
 
         playerNode.position = CGPoint(x:size.width/2.0, y:220.0)
         foregroundNode.addChild(playerNode)
-        //playerNode.anchorPoint=CGPoint(x:1.0,y:1.0)
         
-        /*
-        orbNode.physicsBody = SKPhysicsBody(circleOfRadius:orbNode.size.width/2)
-        orbNode.physicsBody?.isDynamic = false
-        orbNode.physicsBody?.categoryBitMask = CollisionCategoryPowerUpOrbs
-        orbNode.physicsBody?.collisionBitMask = 0
-        
-        orbNode.position = CGPoint(x:(size.width/2) - 10, y: size.height-orbNode.size.height-25)
-        orbNode.name = "POWER_UP_ORB"
-        foregroundNode.addChild(orbNode)
-        
-        var orbNodePosition = CGPoint(x: playerNode.position.x, y: playerNode.position.y + 100)
-        for _ in 0...19{
-            let orbNode = SKSpriteNode(imageNamed: "PowerUp")
-            orbNodePosition.y += 140
-            orbNode.position = orbNodePosition
-            orbNode.physicsBody = SKPhysicsBody(circleOfRadius:orbNode.size.width/2)
-            orbNode.physicsBody?.isDynamic = false
-            orbNode.physicsBody?.categoryBitMask = CollisionCategoryPowerUpOrbs
-            orbNode.physicsBody?.collisionBitMask = 0
-            
-            orbNode.name = "POWER_UP_ORB"
-            foregroundNode.addChild(orbNode)
-            
-        }*/
+        // Particles
+        let engineExaustPath = Bundle.main.path(forResource: "EngineExaust" ,
+                                                ofType: "sks")
+        engineExaust = NSKeyedUnarchiver.unarchiveObject(withFile: engineExaustPath!) as? SKEmitterNode
+        engineExaust?.position = CGPoint(x:0.0, y:-playerNode.size.height/2)
+        playerNode.addChild(engineExaust!)
+        engineExaust?.isHidden = true
         
         addOrbsToForeground()
         
@@ -108,6 +93,7 @@ class GameScene: SKScene {
             // Activates the physical body only after first touch
             playerNode.physicsBody?.isDynamic = true
             
+            
             // Activates accelerometer only after first touch
             coreMotionManager.accelerometerUpdateInterval = 0.3
             coreMotionManager.startAccelerometerUpdates()
@@ -116,29 +102,13 @@ class GameScene: SKScene {
         if impulseCount > 0 {
             playerNode.physicsBody?.applyImpulse(CGVector(dx:0.0,dy:40.0))
             impulseCount -= 1
+            engineExaust?.isHidden = false
+            Timer.scheduledTimer(timeInterval: 0.5, target: self,
+                                 selector: #selector(hideEngineExaust(_:)),
+                                 userInfo: nil, repeats: false)
         }
         //print("Screen Touching happened")
     }
-    
-    /*
-    override func update(_ currentTime:TimeInterval)
-    {
-        if(previousTime == 0){
-            previousTime = currentTime
-            return
-        }
-        
-        var newX = playerNode.position.x
-        newX = newX + playerSpeed * CGFloat(currentTime - previousTime)
-        print("Current position is (\(newX))")
-        playerNode.position = CGPoint(x:newX,y:size.height/2.0)
-        
-        if(playerNode.position.x > size.width-playerNode.size.width ||
-            playerNode.position.x < playerNode.size.width){
-            playerSpeed = playerSpeed * -1
-        }
-        previousTime = currentTime
-    }*/
 
     override func update(_ currentTime:TimeInterval)
     {
@@ -242,6 +212,12 @@ class GameScene: SKScene {
             foregroundNode.addChild(blackHoleNode)
         }
     }
+    @objc func hideEngineExaust(_ timer:Timer! ){
+        if !engineExaust!.isHidden {
+            engineExaust?.isHidden = true
+        }
+    }
+
     
     deinit{
         coreMotionManager.stopAccelerometerUpdates()
@@ -266,4 +242,5 @@ extension GameScene : SKPhysicsContactDelegate {
             impulseCount = 0
         }
     }
+    
 }

@@ -7,31 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		57AAC13C23B4361F004AA21E /* EngineExaust.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57AAC13B23B4361F004AA21E /* EngineExaust.sks */; };
-		57FB7BDC23A9853100D40F03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7BDB23A9853100D40F03 /* AppDelegate.swift */; };
-		57FB7BE223A9853100D40F03 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7BE123A9853100D40F03 /* GameScene.swift */; };
-		57FB7BE423A9853100D40F03 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7BE323A9853100D40F03 /* GameViewController.swift */; };
-		57FB7BE723A9853100D40F03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57FB7BE523A9853100D40F03 /* Main.storyboard */; };
-		57FB7BE923A9853600D40F03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57FB7BE823A9853600D40F03 /* Assets.xcassets */; };
-		57FB7BEC23A9853600D40F03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57FB7BEA23A9853600D40F03 /* LaunchScreen.storyboard */; };
-		57FB7BF423A9ADDD00D40F03 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 57FB7BF323A9ADDD00D40F03 /* sprites.atlas */; };
+		57AAC12023B41A03004AA21E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AAC11F23B41A03004AA21E /* AppDelegate.swift */; };
+		57AAC12223B41A03004AA21E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57AAC12123B41A03004AA21E /* GameScene.sks */; };
+		57AAC12423B41A03004AA21E /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57AAC12323B41A03004AA21E /* Actions.sks */; };
+		57AAC12623B41A03004AA21E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AAC12523B41A03004AA21E /* GameScene.swift */; };
+		57AAC12823B41A03004AA21E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AAC12723B41A03004AA21E /* GameViewController.swift */; };
+		57AAC12B23B41A03004AA21E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57AAC12923B41A03004AA21E /* Main.storyboard */; };
+		57AAC12D23B41A05004AA21E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57AAC12C23B41A05004AA21E /* Assets.xcassets */; };
+		57AAC13023B41A05004AA21E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57AAC12E23B41A05004AA21E /* LaunchScreen.storyboard */; };
+		57AAC13923B41A6F004AA21E /* MySparkParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57AAC13723B41A6F004AA21E /* MySparkParticle.sks */; };
+		57AAC13A23B41A6F004AA21E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57AAC13823B41A6F004AA21E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		57AAC13B23B4361F004AA21E /* EngineExaust.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EngineExaust.sks; sourceTree = "<group>"; };
-		57FB7BD823A9853100D40F03 /* SuperSpaceMan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperSpaceMan.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		57FB7BDB23A9853100D40F03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		57FB7BE123A9853100D40F03 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		57FB7BE323A9853100D40F03 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		57FB7BE623A9853100D40F03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		57FB7BE823A9853600D40F03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		57FB7BEB23A9853600D40F03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		57FB7BED23A9853600D40F03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		57FB7BF323A9ADDD00D40F03 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = sprites.atlas; path = "../../../../beg-swift-games-dev-ios-master/SuperSpaceManBookSwift3_0-master/assets/sprites.atlas"; sourceTree = "<group>"; };
+		57AAC11C23B41A03004AA21E /* ParticleSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParticleSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		57AAC11F23B41A03004AA21E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		57AAC12123B41A03004AA21E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		57AAC12323B41A03004AA21E /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		57AAC12523B41A03004AA21E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		57AAC12723B41A03004AA21E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		57AAC12A23B41A03004AA21E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		57AAC12C23B41A05004AA21E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		57AAC12F23B41A05004AA21E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		57AAC13123B41A05004AA21E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57AAC13723B41A6F004AA21E /* MySparkParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MySparkParticle.sks; sourceTree = "<group>"; };
+		57AAC13823B41A6F004AA21E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		57FB7BD523A9853100D40F03 /* Frameworks */ = {
+		57AAC11923B41A03004AA21E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,74 +45,76 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		57FB7BCF23A9853100D40F03 = {
+		57AAC11323B41A03004AA21E = {
 			isa = PBXGroup;
 			children = (
-				57FB7BDA23A9853100D40F03 /* SuperSpaceMan */,
-				57FB7BD923A9853100D40F03 /* Products */,
+				57AAC13723B41A6F004AA21E /* MySparkParticle.sks */,
+				57AAC13823B41A6F004AA21E /* Assets.xcassets */,
+				57AAC11E23B41A03004AA21E /* ParticleSample */,
+				57AAC11D23B41A03004AA21E /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		57FB7BD923A9853100D40F03 /* Products */ = {
+		57AAC11D23B41A03004AA21E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				57FB7BD823A9853100D40F03 /* SuperSpaceMan.app */,
+				57AAC11C23B41A03004AA21E /* ParticleSample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		57FB7BDA23A9853100D40F03 /* SuperSpaceMan */ = {
+		57AAC11E23B41A03004AA21E /* ParticleSample */ = {
 			isa = PBXGroup;
 			children = (
-				57FB7BDB23A9853100D40F03 /* AppDelegate.swift */,
-				57FB7BE123A9853100D40F03 /* GameScene.swift */,
-				57AAC13B23B4361F004AA21E /* EngineExaust.sks */,
-				57FB7BE323A9853100D40F03 /* GameViewController.swift */,
-				57FB7BE523A9853100D40F03 /* Main.storyboard */,
-				57FB7BE823A9853600D40F03 /* Assets.xcassets */,
-				57FB7BF323A9ADDD00D40F03 /* sprites.atlas */,
-				57FB7BEA23A9853600D40F03 /* LaunchScreen.storyboard */,
-				57FB7BED23A9853600D40F03 /* Info.plist */,
+				57AAC11F23B41A03004AA21E /* AppDelegate.swift */,
+				57AAC12123B41A03004AA21E /* GameScene.sks */,
+				57AAC12323B41A03004AA21E /* Actions.sks */,
+				57AAC12523B41A03004AA21E /* GameScene.swift */,
+				57AAC12723B41A03004AA21E /* GameViewController.swift */,
+				57AAC12923B41A03004AA21E /* Main.storyboard */,
+				57AAC12C23B41A05004AA21E /* Assets.xcassets */,
+				57AAC12E23B41A05004AA21E /* LaunchScreen.storyboard */,
+				57AAC13123B41A05004AA21E /* Info.plist */,
 			);
-			path = SuperSpaceMan;
+			path = ParticleSample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		57FB7BD723A9853100D40F03 /* SuperSpaceMan */ = {
+		57AAC11B23B41A03004AA21E /* ParticleSample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 57FB7BF023A9853600D40F03 /* Build configuration list for PBXNativeTarget "SuperSpaceMan" */;
+			buildConfigurationList = 57AAC13423B41A05004AA21E /* Build configuration list for PBXNativeTarget "ParticleSample" */;
 			buildPhases = (
-				57FB7BD423A9853100D40F03 /* Sources */,
-				57FB7BD523A9853100D40F03 /* Frameworks */,
-				57FB7BD623A9853100D40F03 /* Resources */,
+				57AAC11823B41A03004AA21E /* Sources */,
+				57AAC11923B41A03004AA21E /* Frameworks */,
+				57AAC11A23B41A03004AA21E /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = SuperSpaceMan;
-			productName = SuperSpaceMan;
-			productReference = 57FB7BD823A9853100D40F03 /* SuperSpaceMan.app */;
+			name = ParticleSample;
+			productName = ParticleSample;
+			productReference = 57AAC11C23B41A03004AA21E /* ParticleSample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		57FB7BD023A9853100D40F03 /* Project object */ = {
+		57AAC11423B41A03004AA21E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Ricardo Shimoda Nakasako";
 				TargetAttributes = {
-					57FB7BD723A9853100D40F03 = {
+					57AAC11B23B41A03004AA21E = {
 						CreatedOnToolsVersion = 11.3;
 					};
 				};
 			};
-			buildConfigurationList = 57FB7BD323A9853100D40F03 /* Build configuration list for PBXProject "SuperSpaceMan" */;
+			buildConfigurationList = 57AAC11723B41A03004AA21E /* Build configuration list for PBXProject "ParticleSample" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -116,57 +122,59 @@
 				en,
 				Base,
 			);
-			mainGroup = 57FB7BCF23A9853100D40F03;
-			productRefGroup = 57FB7BD923A9853100D40F03 /* Products */;
+			mainGroup = 57AAC11323B41A03004AA21E;
+			productRefGroup = 57AAC11D23B41A03004AA21E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				57FB7BD723A9853100D40F03 /* SuperSpaceMan */,
+				57AAC11B23B41A03004AA21E /* ParticleSample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		57FB7BD623A9853100D40F03 /* Resources */ = {
+		57AAC11A23B41A03004AA21E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57FB7BE723A9853100D40F03 /* Main.storyboard in Resources */,
-				57FB7BE923A9853600D40F03 /* Assets.xcassets in Resources */,
-				57FB7BF423A9ADDD00D40F03 /* sprites.atlas in Resources */,
-				57AAC13C23B4361F004AA21E /* EngineExaust.sks in Resources */,
-				57FB7BEC23A9853600D40F03 /* LaunchScreen.storyboard in Resources */,
+				57AAC12B23B41A03004AA21E /* Main.storyboard in Resources */,
+				57AAC12223B41A03004AA21E /* GameScene.sks in Resources */,
+				57AAC12D23B41A05004AA21E /* Assets.xcassets in Resources */,
+				57AAC13923B41A6F004AA21E /* MySparkParticle.sks in Resources */,
+				57AAC13A23B41A6F004AA21E /* Assets.xcassets in Resources */,
+				57AAC13023B41A05004AA21E /* LaunchScreen.storyboard in Resources */,
+				57AAC12423B41A03004AA21E /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		57FB7BD423A9853100D40F03 /* Sources */ = {
+		57AAC11823B41A03004AA21E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57FB7BE223A9853100D40F03 /* GameScene.swift in Sources */,
-				57FB7BE423A9853100D40F03 /* GameViewController.swift in Sources */,
-				57FB7BDC23A9853100D40F03 /* AppDelegate.swift in Sources */,
+				57AAC12623B41A03004AA21E /* GameScene.swift in Sources */,
+				57AAC12823B41A03004AA21E /* GameViewController.swift in Sources */,
+				57AAC12023B41A03004AA21E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		57FB7BE523A9853100D40F03 /* Main.storyboard */ = {
+		57AAC12923B41A03004AA21E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				57FB7BE623A9853100D40F03 /* Base */,
+				57AAC12A23B41A03004AA21E /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		57FB7BEA23A9853600D40F03 /* LaunchScreen.storyboard */ = {
+		57AAC12E23B41A05004AA21E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				57FB7BEB23A9853600D40F03 /* Base */,
+				57AAC12F23B41A05004AA21E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -174,7 +182,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		57FB7BEE23A9853600D40F03 /* Debug */ = {
+		57AAC13223B41A05004AA21E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -234,7 +242,7 @@
 			};
 			name = Debug;
 		};
-		57FB7BEF23A9853600D40F03 /* Release */ = {
+		57AAC13323B41A05004AA21E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -288,38 +296,36 @@
 			};
 			name = Release;
 		};
-		57FB7BF123A9853600D40F03 /* Debug */ = {
+		57AAC13523B41A05004AA21E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 55ZPW8X5DU;
-				INFOPLIST_FILE = SuperSpaceMan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				INFOPLIST_FILE = ParticleSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.gbcgame3004.rsn.SuperSpaceMan;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.gbcgame3004.rsn.ParticleSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		57FB7BF223A9853600D40F03 /* Release */ = {
+		57AAC13623B41A05004AA21E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 55ZPW8X5DU;
-				INFOPLIST_FILE = SuperSpaceMan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				INFOPLIST_FILE = ParticleSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.gbcgame3004.rsn.SuperSpaceMan;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.gbcgame3004.rsn.ParticleSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -329,25 +335,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		57FB7BD323A9853100D40F03 /* Build configuration list for PBXProject "SuperSpaceMan" */ = {
+		57AAC11723B41A03004AA21E /* Build configuration list for PBXProject "ParticleSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				57FB7BEE23A9853600D40F03 /* Debug */,
-				57FB7BEF23A9853600D40F03 /* Release */,
+				57AAC13223B41A05004AA21E /* Debug */,
+				57AAC13323B41A05004AA21E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		57FB7BF023A9853600D40F03 /* Build configuration list for PBXNativeTarget "SuperSpaceMan" */ = {
+		57AAC13423B41A05004AA21E /* Build configuration list for PBXNativeTarget "ParticleSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				57FB7BF123A9853600D40F03 /* Debug */,
-				57FB7BF223A9853600D40F03 /* Release */,
+				57AAC13523B41A05004AA21E /* Debug */,
+				57AAC13623B41A05004AA21E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 57FB7BD023A9853100D40F03 /* Project object */;
+	rootObject = 57AAC11423B41A03004AA21E /* Project object */;
 }
