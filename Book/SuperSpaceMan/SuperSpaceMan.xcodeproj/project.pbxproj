@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		57AAC13C23B4361F004AA21E /* EngineExaust.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57AAC13B23B4361F004AA21E /* EngineExaust.sks */; };
+		57AAC13E23B45AE7004AA21E /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 57AAC13D23B45AE7004AA21E /* sounds */; };
 		57FB7BDC23A9853100D40F03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7BDB23A9853100D40F03 /* AppDelegate.swift */; };
 		57FB7BE223A9853100D40F03 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7BE123A9853100D40F03 /* GameScene.swift */; };
 		57FB7BE423A9853100D40F03 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7BE323A9853100D40F03 /* GameViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		57AAC13B23B4361F004AA21E /* EngineExaust.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EngineExaust.sks; sourceTree = "<group>"; };
+		57AAC13D23B45AE7004AA21E /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		57FB7BD823A9853100D40F03 /* SuperSpaceMan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperSpaceMan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57FB7BDB23A9853100D40F03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57FB7BE123A9853100D40F03 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 		57FB7BDA23A9853100D40F03 /* SuperSpaceMan */ = {
 			isa = PBXGroup;
 			children = (
+				57AAC13D23B45AE7004AA21E /* sounds */,
 				57FB7BDB23A9853100D40F03 /* AppDelegate.swift */,
 				57FB7BE123A9853100D40F03 /* GameScene.swift */,
 				57AAC13B23B4361F004AA21E /* EngineExaust.sks */,
@@ -133,6 +136,7 @@
 			files = (
 				57FB7BE723A9853100D40F03 /* Main.storyboard in Resources */,
 				57FB7BE923A9853600D40F03 /* Assets.xcassets in Resources */,
+				57AAC13E23B45AE7004AA21E /* sounds in Resources */,
 				57FB7BF423A9ADDD00D40F03 /* sprites.atlas in Resources */,
 				57AAC13C23B4361F004AA21E /* EngineExaust.sks in Resources */,
 				57FB7BEC23A9853600D40F03 /* LaunchScreen.storyboard in Resources */,

@@ -31,6 +31,14 @@ class GameScene: SKScene {
     // Particle
     var engineExaust: SKEmitterNode?
     
+    // UI
+    var score = 0
+    let scoreTextNode = SKLabelNode(fontNamed: "Copperplate")
+    let impulseTextNode = SKLabelNode(fontNamed: "Copperplate")
+    
+    //Sound
+    let orbPopAction = SKAction.playSoundFileNamed("sounds/orb_pop.wav", waitForCompletion: false)
+    
     //var playerSpeed:CGFloat = 200
     //var previousTime:Double = 0
     //var frameCounter = 1
@@ -82,6 +90,22 @@ class GameScene: SKScene {
         playerNode.addChild(engineExaust!)
         engineExaust?.isHidden = true
         
+        // UI
+        scoreTextNode.text = "SCORE: \(score)"
+        scoreTextNode.fontSize = 20
+        scoreTextNode.fontColor = SKColor.white
+        scoreTextNode.position = CGPoint(x: size.width - 10, y: size.height-20)
+        scoreTextNode.horizontalAlignmentMode = .right
+        addChild(scoreTextNode)
+        
+        impulseTextNode.text = "IMPULSES: \(impulseCount)"
+        impulseTextNode.fontSize = 20
+        impulseTextNode.fontColor = SKColor.white
+        impulseTextNode.position = CGPoint(x: 10, y: size.height-20)
+        impulseTextNode.horizontalAlignmentMode = .left
+        addChild(impulseTextNode)
+        
+        
         addOrbsToForeground()
         
         addBlackHolesToForeground()
@@ -102,6 +126,7 @@ class GameScene: SKScene {
         if impulseCount > 0 {
             playerNode.physicsBody?.applyImpulse(CGVector(dx:0.0,dy:40.0))
             impulseCount -= 1
+            impulseTextNode.text = "IMPULSES: \(impulseCount)"
             engineExaust?.isHidden = false
             Timer.scheduledTimer(timeInterval: 0.5, target: self,
                                  selector: #selector(hideEngineExaust(_:)),
@@ -228,7 +253,15 @@ extension GameScene : SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact){
         let nodeB = contact.bodyB.node
         if nodeB?.name == "POWER_UP_ORB" {
+            
+            run(orbPopAction)
+            
             impulseCount += 1
+            impulseTextNode.text = "IMPULSES: \(impulseCount)"
+
+            score += 1
+            scoreTextNode.text = "SCORE: \(score)"
+
             nodeB?.removeFromParent()
         }
         else if nodeB?.name == "BLACK_HOLE" {
@@ -240,6 +273,7 @@ extension GameScene : SKPhysicsContactDelegate {
             playerNode.physicsBody?.contactTestBitMask = 0
             
             impulseCount = 0
+            impulseTextNode.text = "IMPULSES: \(impulseCount)"
         }
     }
     
