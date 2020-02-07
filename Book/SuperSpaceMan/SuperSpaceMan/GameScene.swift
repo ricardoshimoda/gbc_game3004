@@ -35,6 +35,7 @@ class GameScene: SKScene {
     var score = 0
     let scoreTextNode = SKLabelNode(fontNamed: "Copperplate")
     let impulseTextNode = SKLabelNode(fontNamed: "Copperplate")
+    let startGameNode = SKLabelNode(fontNamed: "Copperplate")
     
     //Sound
     let orbPopAction = SKAction.playSoundFileNamed("sounds/orb_pop.wav", waitForCompletion: false)
@@ -105,6 +106,15 @@ class GameScene: SKScene {
         impulseTextNode.horizontalAlignmentMode = .left
         addChild(impulseTextNode)
         
+        startGameNode.text = "TAP ANYWHERE TO START"
+        startGameNode.horizontalAlignmentMode = .center
+        startGameNode.verticalAlignmentMode = .center
+        startGameNode.fontSize = 20
+        startGameNode.fontColor = .white
+        startGameNode.position = CGPoint(x: scene!.size.width / 2,
+                                         y: scene!.size.height / 2)
+        addChild(startGameNode)
+        
         
         addOrbsToForeground()
         
@@ -117,6 +127,8 @@ class GameScene: SKScene {
             // Activates the physical body only after first touch
             playerNode.physicsBody?.isDynamic = true
             
+            // Removes the central label
+            startGameNode.removeFromParent()
             
             // Activates accelerometer only after first touch
             coreMotionManager.accelerometerUpdateInterval = 0.3
@@ -137,7 +149,7 @@ class GameScene: SKScene {
 
     override func update(_ currentTime:TimeInterval)
     {
-        if playerNode.position.y >= playerInitialY{
+        if playerNode.position.y >= playerInitialY && playerNode.position.y < 6400.0 {
             backgroundNode.position = CGPoint(x: backgroundNode.position.x,
                                               y: -((playerNode.position.y - playerInitialY))/8)
             
@@ -151,6 +163,10 @@ class GameScene: SKScene {
             // matches the speed of the player so that all other (not BKG) elements are scrolled together
             foregroundNode.position = CGPoint(x: foregroundNode.position.x,
                                               y: -(playerNode.position.y - playerInitialY))
+        } else if playerNode.position.y > 7000.0 {
+            gameOverWithResult(true)
+        } else if playerNode.position.y < 0.0 {
+            gameOverWithResult(false)
         }
     }
 
@@ -169,6 +185,15 @@ class GameScene: SKScene {
             playerNode.position = CGPoint(x: playerNode.size.width/2,
                                           y: playerNode.position.y )
         }
+    }
+    
+    func gameOverWithResult(_ gameResult:Bool){
+        playerNode.removeFromParent()
+        
+        // Let's transition to game results
+        let transition = SKTransition.crossFade(withDuration: 2.0)
+        let menuScene = MenuScene(size: size, gameResult: gameResult, score: score)
+        view?.presentScene(menuScene, transition: transition)
     }
     
     func addOrbsToForeground(){
