@@ -7,6 +7,7 @@ import GameplayKit
 
 class GameScene: BaseScene {
     var playerRatio:CGFloat = 0.045
+    var gamePaused = false
     
     var scoreNodes:[ScoreNumberNode] = []
     var currentScore:Int = 0
@@ -20,6 +21,8 @@ class GameScene: BaseScene {
     var getReadyRatio:CGFloat = 0.065
     
     let pipeCollectionNode = SKSpriteNode()
+    var pipeFirst:SKSpriteNode = SKSpriteNode()
+    var pipeSecond:SKSpriteNode = SKSpriteNode()
     let pipes:[SKSpriteNode] = [
         SKSpriteNode(imageNamed: "pipedown"),
         SKSpriteNode(imageNamed: "pipeup"),
@@ -34,13 +37,18 @@ class GameScene: BaseScene {
     let tapEffect:SKSpriteNode = SKSpriteNode(imageNamed: "tapeffect")
     var tutorial:[SKSpriteNode] = []
     
-    
+    var playButtonProp:CGFloat = 0.06
+    let playTexture:SKTexture = SKTexture(imageNamed: "playbtn")
+    let playTextureSelected:SKTexture = SKTexture(imageNamed: "playbtnpressed")
+    let pauseTexture:SKTexture = SKTexture(imageNamed: "pausebtn")
+    let pauseTextureSelected:SKTexture = SKTexture(imageNamed: "pausebtnpressed")
+
     required init?(coder aDecoder : NSCoder){
         super.init(coder: aDecoder)
     }
     override init(size: CGSize){
         super.init(size:size)
-        currentScore = 34343434
+        currentScore = 0
         /*
          * Implementing the things that are particular for this interface
          */
@@ -49,42 +57,84 @@ class GameScene: BaseScene {
         getReady()
         addPlayer()
         updateScore()
+        renderButtons()
     }
-    
+    func renderButtons(){
+        playButtonProp = playButtonProp * h/playTexture.size().height
+        let playBtn = FTButtonNode(
+            defaultTexture: playTexture,
+            selectedTexture: playTextureSelected,
+            disabledTexture: playTexture,
+            prop: playButtonProp)
+        playBtn.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(GameScene.playBtnTap))
+        playBtn.anchorPoint = CGPoint(x: 0,y: 1)
+        playBtn.position = CGPoint(x: 0.04 * h, y: 0.96 * h)
+        playBtn.zPosition = 1
+        playBtn.name = "playBtn"
+        addChild(playBtn)
+        let pauseBtn = FTButtonNode(
+            defaultTexture: pauseTexture,
+            selectedTexture: pauseTextureSelected,
+            disabledTexture: pauseTexture, prop: playButtonProp)
+        pauseBtn.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(TitleScene.scoreBtnTap))
+        pauseBtn.position = CGPoint(x: 0.05 * h, y: 0.95 * h)
+        pauseBtn.zPosition = 1
+        pauseBtn.name = "pauseBtn"
+        //self.addChild(pauseBtn)
+
+    }
+    @objc func pauseBtnTap(){
+        print("Pause button has been pressed")
+    }
+    @objc func playBtnTap ()
+    {
+        print("Play button has been pressed")
+    }
     func generatePillars(){
         addChild(pipeCollectionNode)
         let movingPillar = SKAction.moveBy(x:-1.2 * w, y:0, duration: 2)
-        let repositioningPillar = SKAction.moveTo(x: w,  duration: 0)
+        //let repositioningPillar = SKAction.moveTo(x: w,  duration: 0)
+        let repositioningPillar = SKAction.customAction(withDuration: 0) {
+            node, elapsedTime in
+            if let node = node as? SKSpriteNode {
+                let randomHeight:CGFloat = CGFloat(Float.random(in: 0...0.3))
+                node.position = CGPoint(x: self.w, y: randomHeight * self.h)
+            }
+        }
         let forever = SKAction.repeatForever(SKAction.sequence([movingPillar, repositioningPillar]))
         let delayedForever = SKAction.sequence([SKAction.wait(forDuration:1),forever])
         for pi in 0..<pipes.count{
             pipes[pi].size.width = 0.2 * w
             pipes[pi].size.height = h
             
-            var posX = w
-            if pi / 2 > 0 {
-                pipes[pi].run(delayedForever)
-            }
-            else{
-                pipes[pi].run(forever)
-            }
-
             // and now for the tricky part
             if(pi % 2 == 0){
                 //PipeDown
                 pipes[pi].anchorPoint = CGPoint(x:0, y: 1)
-                pipes[pi].position = CGPoint(x:posX , y: 0.33 * h)
+                pipes[pi].position = CGPoint(x:0 , y: 0.33 * h)
+                pipes[pi].name = "down"
             }
             else{
                 pipes[pi].anchorPoint = CGPoint(x:0, y: 0)
-                pipes[pi].position = CGPoint(x:posX, y: 0.53 * h)
+                pipes[pi].position = CGPoint(x:0, y: 0.53 * h)
+                pipes[pi].name = "up"
             }
             
-            // Creating actions
-            
-            pipeCollectionNode.addChild(pipes[pi])
-
+            if pi / 2 > 0 {
+                pipeFirst.addChild(pipes[pi])
+            }
+            else{
+                pipeSecond.addChild(pipes[pi])
+            }
         }
+        pipeFirst.position = CGPoint(x:w, y: 0)
+        pipeSecond.position = CGPoint(x:w, y: 0.1*h)
+        /*
+        pipeFirst.run(forever)
+        pipeSecond.run(delayedForever)
+        */
+        pipeCollectionNode.addChild(pipeFirst)
+        pipeCollectionNode.addChild(pipeSecond)
     }
     func getReady(){
         var acc:CGFloat = 0
