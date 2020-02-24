@@ -100,32 +100,24 @@ class BaseScene: SKScene {
         ground01.removeAction(forKey: "ground_moving")
         ground02.removeAction(forKey: "ground_moving")
     }
-    /*
-    func touchDown(atPoint pos : CGPoint) {
-    }
     
-    func touchMoved(toPoint pos : CGPoint) {
+    func pauseGround(){
+        if let action = ground01.action(forKey: "ground_moving") {
+            action.speed = 0
+        }
+        if let action = ground02.action(forKey: "ground_moving") {
+            action.speed = 0
+        }
     }
-    
-    func touchUp(atPoint pos : CGPoint) {
+    func unpauseGround(){
+        if let action = ground01.action(forKey: "ground_moving") {
+            action.speed = 1
+        }
+        if let action = ground02.action(forKey: "ground_moving") {
+            action.speed = 1
+        }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    */
+
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-        //groundSpeed * TimeInterval
-        //ground01.move(toPar)
     }
-    
 }

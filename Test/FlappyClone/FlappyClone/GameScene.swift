@@ -1,6 +1,7 @@
 
 import SpriteKit
-import GameplayKit
+import CoreMotion
+
 
 /*
  */
@@ -46,6 +47,8 @@ class GameScene: BaseScene {
     let playTextureSelected:SKTexture = SKTexture(imageNamed: "playbtnpressed")
     let pauseTexture:SKTexture = SKTexture(imageNamed: "pausebtn")
     let pauseTextureSelected:SKTexture = SKTexture(imageNamed: "pausebtnpressed")
+    var playBtn : SKSpriteNode = SKSpriteNode()
+    var pauseBtn : SKSpriteNode = SKSpriteNode()
 
     required init?(coder aDecoder : NSCoder){
         super.init(coder: aDecoder)
@@ -67,22 +70,24 @@ class GameScene: BaseScene {
     }
     func renderButtons(){
         playButtonProp = playButtonProp * h/playTexture.size().height
-        let playBtn = FTButtonNode(
+        playBtn = FTButtonNode(
             defaultTexture: playTexture,
             selectedTexture: playTextureSelected,
             disabledTexture: playTexture,
             prop: playButtonProp)
-        playBtn.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(GameScene.playBtnTap))
+        let pb = playBtn as? FTButtonNode
+        pb!.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(GameScene.playBtnTap))
         playBtn.anchorPoint = CGPoint(x: 0,y: 1)
         playBtn.position = CGPoint(x: 0.04 * h, y: 0.96 * h)
         playBtn.zPosition = 1
         playBtn.name = "playBtn"
         addChild(playBtn)
-        let pauseBtn = FTButtonNode(
+        pauseBtn = FTButtonNode(
             defaultTexture: pauseTexture,
             selectedTexture: pauseTextureSelected,
             disabledTexture: pauseTexture, prop: playButtonProp)
-        pauseBtn.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(TitleScene.scoreBtnTap))
+        let ps = pauseBtn as? FTButtonNode
+        ps!.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(GameScene.pauseBtnTap))
         pauseBtn.position = CGPoint(x: 0.05 * h, y: 0.95 * h)
         pauseBtn.zPosition = 1
         pauseBtn.name = "pauseBtn"
@@ -91,6 +96,7 @@ class GameScene: BaseScene {
     }
     @objc func pauseBtnTap(){
         print("Pause button has been pressed")
+        
     }
     @objc func playBtnTap ()
     {
@@ -187,12 +193,14 @@ class GameScene: BaseScene {
         let braceforImpact = SKAction.wait(forDuration:0.5)
         let goPillars = SKAction.customAction(withDuration: 0) {
             node, elapsedTime in
-            self.pipeFirst.run(self.forever)
-            self.pipeSecond.run(self.delayedForever)
+            self.pipeFirst.run(self.forever, withKey: "pipe_moving")
+            self.pipeSecond.run(self.delayedForever, withKey: "pipe_moving")
         }
-        tutorial[0].run(SKAction.sequence([fadeOut, braceforImpact, goPillars]))
+        
+        /* waits for about 1 second before fading out */
+        tutorial[0].run(SKAction.sequence([braceforImpact, braceforImpact, fadeOut, braceforImpact, goPillars]))
         for i in 1..<tutorial.count {
-            tutorial[i].run(fadeOut)
+            tutorial[i].run(SKAction.sequence([braceforImpact, braceforImpact, fadeOut]))
         }
     }
     func addPlayer(){
