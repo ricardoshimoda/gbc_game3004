@@ -32,6 +32,7 @@ class GameScene: BaseScene {
     var forever:SKAction = SKAction.wait(forDuration: 0.1)
     var delayedForever:SKAction = SKAction.wait(forDuration: 0.1)
     var pipeInterval:TimeInterval = 4
+    var pipeWidthProp:CGFloat = 0.2
     
     let bw:SKSpriteNode = SKSpriteNode(imageNamed: "blackwhite")
     let upArrow:SKSpriteNode = SKSpriteNode(imageNamed: "uparrow")
@@ -104,12 +105,13 @@ class GameScene: BaseScene {
             if let node = node as? SKSpriteNode {
                 let randomHeight:CGFloat = CGFloat(Float.random(in: 0...0.3))
                 node.position = CGPoint(x: self.w, y: randomHeight * self.h)
+                node.name = "U"
             }
         }
         forever = SKAction.repeatForever(SKAction.sequence([movingPillar, repositioningPillar]))
         delayedForever = SKAction.sequence([SKAction.wait(forDuration: 0.5 * pipeInterval),forever])
         for pi in 0..<pipes.count{
-            pipes[pi].size.width = 0.2 * w
+            pipes[pi].size.width = pipeWidthProp * w
             pipes[pi].size.height = h
             
             // and now for the tricky part
@@ -117,12 +119,10 @@ class GameScene: BaseScene {
                 //PipeDown
                 pipes[pi].anchorPoint = CGPoint(x:0, y: 1)
                 pipes[pi].position = CGPoint(x:0 , y: 0.33 * h)
-                pipes[pi].name = "down"
             }
             else{
                 pipes[pi].anchorPoint = CGPoint(x:0, y: 0)
                 pipes[pi].position = CGPoint(x:0, y: 0.53 * h)
-                pipes[pi].name = "up"
             }
             
             if pi / 2 > 0 {
@@ -134,6 +134,8 @@ class GameScene: BaseScene {
         }
         pipeFirst.position = CGPoint(x:w, y: 0)
         pipeSecond.position = CGPoint(x:w, y: 0.1*h)
+        pipeFirst.name = "U"
+        pipeSecond.name = "U"
         pipeCollectionNode.addChild(pipeFirst)
         pipeCollectionNode.addChild(pipeSecond)
     }
@@ -207,47 +209,56 @@ class GameScene: BaseScene {
         var numeral = currentScore % 10
         var left = (currentScore - numeral) / 10
         while left > 0  {
-            if scIdx < scoreNodes.count - 1 {
+            if scIdx < scoreNodes.count {
                 scoreNodes[scIdx].val = numeral
             }
             else {
-                scoreNodes.append(ScoreNumberNode(numeral, sc: true, prop: scoreProp * h))
+                let newNumber = ScoreNumberNode(numeral, sc: true, prop: scoreProp * h)
+                scoreNodes.append(newNumber)
+                //addChild(newNumber)
             }
             numeral = left % 10
             left = (left - numeral) / 10
             scIdx += 1
         }
         // last number
-        if scIdx < scoreNodes.count - 1 {
+        if scIdx < scoreNodes.count  {
             scoreNodes[scIdx].val = numeral
         }
         else {
-            scoreNodes.append(ScoreNumberNode(numeral, sc: true, prop: scoreProp * h))
+            let newNumber = ScoreNumberNode(numeral, sc: true, prop: scoreProp * h)
+            scoreNodes.append(newNumber)
+            //addChild(newNumber)
         }
     }
     func updateScore(){
         let separator = 0.005 * w
-        if scoreNodes.count == 0 || (10^^scoreNodes.count) < currentScore {
+        if scoreNodes.count == 0 || (10^^(scoreNodes.count) <= currentScore) {
+            for scIdx in (0..<scoreNodes.count).reversed() {
+                scoreNodes[scIdx].removeFromParent()
+            }
             if currentScore == 0{
                 scoreNodes.append(ScoreNumberNode(0, sc: true, prop: scoreProp * h))
             }
             else {
                 parseScore()
+                print("Adding nodes \(scoreNodes.count)")
             }
             /* Repositions numbers with the new ensemble */
             var acc:CGFloat = 0
             for scIdx in (0..<scoreNodes.count).reversed() {
                 scoreNodes[scIdx].position = CGPoint(x: 0.5 * w + acc + separator, y: 0.9 * h)
                 acc += scoreNodes[scIdx].size.width + separator
-                addChild(scoreNodes[scIdx])
             }
             for scIdx in (0..<scoreNodes.count).reversed() {
                 let finalX = scoreNodes[scIdx].position.x - 0.5 * acc
                 scoreNodes[scIdx].position.x = finalX
+                addChild(scoreNodes[scIdx])
             }
         }
         else {
             parseScore()
+            print("Not adding nodes \(scoreNodes.count)")
         }
     }
     func touchDown(atPoint pos : CGPoint) {
@@ -275,5 +286,19 @@ class GameScene: BaseScene {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         super.update(currentTime)
+        let delta = pipeWidthProp * 0.25 * w
+        
+        if pipeFirst.name == "U" && pipeFirst.position.x - delta < playerNode.position.x && pipeFirst.position.x + delta > playerNode.position.x {
+            print("[First] The current score is: \(currentScore)" )
+            pipeFirst.name = "C"
+            currentScore += 1
+            updateScore()
+        }
+        if pipeSecond.name == "U" && pipeSecond.position.x - delta < playerNode.position.x && pipeSecond.position.x + delta > playerNode.position.x {
+            print("[Second] The current score is: \(currentScore)" )
+            pipeSecond.name = "C"
+            currentScore += 1
+            updateScore()
+        }
     }
 }
