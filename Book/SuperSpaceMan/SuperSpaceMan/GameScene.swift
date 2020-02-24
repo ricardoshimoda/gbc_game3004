@@ -246,6 +246,8 @@ class GameScene: SKScene {
         let moveAction = SKAction.repeatForever(actionSequence)
         
         for i in 1...10 {
+            
+            // the node has to have an initial image
             let blackHoleNode = SKSpriteNode(imageNamed: "BlackHole0")
             blackHoleNode.position = CGPoint(x: size.width - 80.0, y:600.0 * CGFloat(i))
             
@@ -255,6 +257,7 @@ class GameScene: SKScene {
             blackHoleNode.physicsBody?.collisionBitMask = 0
             
             blackHoleNode.run(moveAction)
+            // This is where we append the animation into this node
             blackHoleNode.run(rotateAction)
             
             blackHoleNode.name = "BLACK_HOLE"

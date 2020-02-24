@@ -10,23 +10,34 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+/*
+ 
+ */
+precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
+infix operator ^^ : PowerPrecedence
+func ^^ (radix: Int, power: Int) -> Int {
+    return Int(pow(Double(radix), Double(power)))
+}
+
+
 class GameViewController: UIViewController {
+    
+    var titleScene: TitleScene!
+    var gameScene: GameScene!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Present the scene
-                view.presentScene(scene)
-            }
             
-            view.ignoresSiblingOrder = true
+            //titleScene = TitleScene(size:view.bounds.size)
+            //titleScene.scaleMode = .aspectFill
+            //view.presentScene(titleScene)
+            gameScene = GameScene(size: view.bounds.size)
+            gameScene.scaleMode = .aspectFill
+            view.presentScene(gameScene)
             
+            /* Common code for all scenes */
+            view.ignoresSiblingOrder = false
             view.showsFPS = true
             view.showsNodeCount = true
         }
@@ -37,10 +48,11 @@ class GameViewController: UIViewController {
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        // We'll support only portrait for this flappy clone
         if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
+            return .portrait
         } else {
-            return .all
+            return .portrait
         }
     }
 
