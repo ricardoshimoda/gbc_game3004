@@ -99,12 +99,28 @@ class GameScene: BaseScene {
         print("Pause button has been pressed")
         pauseBtn.removeFromParent()
         addChild(playBtn)
+        pauseGround()
+        pausePlayer()
+        if let action = pipeFirst.action(forKey: "pipe_moving") {
+            action.speed = 0
+        }
+        if let action = pipeSecond.action(forKey: "pipe_moving") {
+            action.speed = 0
+        }
     }
     @objc func playBtnTap ()
     {
         print("Play button has been pressed")
         playBtn.removeFromParent()
         addChild(pauseBtn)
+        unpauseGround()
+        unpausePlayer()
+        if let action = pipeFirst.action(forKey: "pipe_moving") {
+            action.speed = 1
+        }
+        if let action = pipeSecond.action(forKey: "pipe_moving") {
+            action.speed = 1
+        }
     }
     func generatePillars(){
         addChild(pipeCollectionNode)

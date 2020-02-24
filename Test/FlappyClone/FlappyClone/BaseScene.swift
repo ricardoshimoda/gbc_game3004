@@ -117,6 +117,16 @@ class BaseScene: SKScene {
             action.speed = 1
         }
     }
+    func pausePlayer(){
+        if let action = playerNode.action(forKey: "animation") {
+            action.speed = 0
+        }
+    }
+    func unpausePlayer(){
+        if let action = playerNode.action(forKey: "animation") {
+            action.speed = 1
+        }
+    }
 
     override func update(_ currentTime: TimeInterval) {
     }
