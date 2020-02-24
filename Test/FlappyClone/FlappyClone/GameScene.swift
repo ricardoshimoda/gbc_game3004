@@ -81,26 +81,30 @@ class GameScene: BaseScene {
         playBtn.position = CGPoint(x: 0.04 * h, y: 0.96 * h)
         playBtn.zPosition = 1
         playBtn.name = "playBtn"
-        addChild(playBtn)
+        //addChild(playBtn)
         pauseBtn = FTButtonNode(
             defaultTexture: pauseTexture,
             selectedTexture: pauseTextureSelected,
             disabledTexture: pauseTexture, prop: playButtonProp)
         let ps = pauseBtn as? FTButtonNode
         ps!.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(GameScene.pauseBtnTap))
-        pauseBtn.position = CGPoint(x: 0.05 * h, y: 0.95 * h)
+        pauseBtn.anchorPoint = CGPoint(x: 0,y: 1)
+        pauseBtn.position = CGPoint(x: 0.04 * h, y: 0.96 * h)
         pauseBtn.zPosition = 1
         pauseBtn.name = "pauseBtn"
-        //self.addChild(pauseBtn)
+        addChild(pauseBtn)
 
     }
     @objc func pauseBtnTap(){
         print("Pause button has been pressed")
-        
+        pauseBtn.removeFromParent()
+        addChild(playBtn)
     }
     @objc func playBtnTap ()
     {
         print("Play button has been pressed")
+        playBtn.removeFromParent()
+        addChild(pauseBtn)
     }
     func generatePillars(){
         addChild(pipeCollectionNode)
