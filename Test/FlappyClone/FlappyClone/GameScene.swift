@@ -29,6 +29,9 @@ class GameScene: BaseScene {
         SKSpriteNode(imageNamed: "pipedown"),
         SKSpriteNode(imageNamed: "pipeup")
     ]
+    var forever:SKAction = SKAction.wait(forDuration: 0.1)
+    var delayedForever:SKAction = SKAction.wait(forDuration: 0.1)
+    var pipeInterval:TimeInterval = 4
     
     let bw:SKSpriteNode = SKSpriteNode(imageNamed: "blackwhite")
     let upArrow:SKSpriteNode = SKSpriteNode(imageNamed: "uparrow")
@@ -53,11 +56,13 @@ class GameScene: BaseScene {
          * Implementing the things that are particular for this interface
          */
         generatePillars()
-        super.addGround(4)
+        super.addGround(pipeInterval/1.2)
+        // Ephemeral - is executed last
         getReady()
         addPlayer()
         updateScore()
         renderButtons()
+        
     }
     func renderButtons(){
         playButtonProp = playButtonProp * h/playTexture.size().height
@@ -92,7 +97,7 @@ class GameScene: BaseScene {
     }
     func generatePillars(){
         addChild(pipeCollectionNode)
-        let movingPillar = SKAction.moveBy(x:-1.2 * w, y:0, duration: 2)
+        let movingPillar = SKAction.moveBy(x:-1.2 * w, y:0, duration: pipeInterval)
         //let repositioningPillar = SKAction.moveTo(x: w,  duration: 0)
         let repositioningPillar = SKAction.customAction(withDuration: 0) {
             node, elapsedTime in
@@ -101,8 +106,8 @@ class GameScene: BaseScene {
                 node.position = CGPoint(x: self.w, y: randomHeight * self.h)
             }
         }
-        let forever = SKAction.repeatForever(SKAction.sequence([movingPillar, repositioningPillar]))
-        let delayedForever = SKAction.sequence([SKAction.wait(forDuration:1),forever])
+        forever = SKAction.repeatForever(SKAction.sequence([movingPillar, repositioningPillar]))
+        delayedForever = SKAction.sequence([SKAction.wait(forDuration: 0.5 * pipeInterval),forever])
         for pi in 0..<pipes.count{
             pipes[pi].size.width = 0.2 * w
             pipes[pi].size.height = h
@@ -129,10 +134,6 @@ class GameScene: BaseScene {
         }
         pipeFirst.position = CGPoint(x:w, y: 0)
         pipeSecond.position = CGPoint(x:w, y: 0.1*h)
-        /*
-        pipeFirst.run(forever)
-        pipeSecond.run(delayedForever)
-        */
         pipeCollectionNode.addChild(pipeFirst)
         pipeCollectionNode.addChild(pipeSecond)
     }
@@ -179,11 +180,18 @@ class GameScene: BaseScene {
         tap.position = CGPoint(x: 0.7 * w,y: 0.50*h)
         addChild(tap)
         tutorial.append(tap)
-        /*
+        
         let fadeOut = SKAction.fadeOut(withDuration: 2)
-        for i in 0...tutorial.count-1 {
+        let braceforImpact = SKAction.wait(forDuration:0.5)
+        let goPillars = SKAction.customAction(withDuration: 0) {
+            node, elapsedTime in
+            self.pipeFirst.run(self.forever)
+            self.pipeSecond.run(self.delayedForever)
+        }
+        tutorial[0].run(SKAction.sequence([fadeOut, braceforImpact, goPillars]))
+        for i in 1..<tutorial.count {
             tutorial[i].run(fadeOut)
-        }*/
+        }
     }
     func addPlayer(){
         playerRatio = playerRatio * h / playerNode.size.height
