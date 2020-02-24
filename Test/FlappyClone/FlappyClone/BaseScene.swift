@@ -70,6 +70,19 @@ class BaseScene: SKScene {
         ground01.size.height = gHProp * frame.size.height
         ground01.anchorPoint = CGPoint(x:0.0,y:0.0)
         ground01.position = CGPoint(x:0.0,y:0.0)
+        
+        var testSize = ground01.size
+        testSize.height *= 2 /* Experimental value */
+        
+        ground01.physicsBody = SKPhysicsBody(texture: ground01.texture!, size: testSize)
+        ground01.physicsBody?.isDynamic = false
+        ground01.physicsBody?.linearDamping = 1.0
+        ground01.physicsBody?.allowsRotation = false
+        ground01.physicsBody?.categoryBitMask = CollisionCategory.Ground
+        ground01.physicsBody?.contactTestBitMask = CollisionCategory.Player
+        ground01.physicsBody?.collisionBitMask = CollisionCategory.Player // There is no recovering from the ground
+        //ground01.physicsBody?.
+
         addChild(ground01)
 
         /*
@@ -85,6 +98,15 @@ class BaseScene: SKScene {
         ground02.size.height = gHProp * frame.size.height
         ground02.anchorPoint = CGPoint(x:0.0, y:0.0)
         ground02.position = CGPoint(x:frame.size.width, y:0.0)
+        
+        ground02.physicsBody = SKPhysicsBody(texture: ground02.texture!, size: testSize)
+        ground02.physicsBody?.isDynamic = false
+        ground02.physicsBody?.linearDamping = 1.0
+        ground02.physicsBody?.allowsRotation = false
+        ground02.physicsBody?.categoryBitMask = CollisionCategory.Ground
+        ground02.physicsBody?.contactTestBitMask = CollisionCategory.Player
+        ground02.physicsBody?.collisionBitMask = CollisionCategory.Player // There is no recovering from the ground
+
         addChild(ground02)
         /*
          * Actions created to move the ground repeatedly

@@ -151,6 +151,16 @@ class GameScene: BaseScene {
                 pipes[pi].position = CGPoint(x:0, y: 0.53 * h)
             }
             
+            // Adding physics (how difficult can that be?
+            // I just hope anchoring is not going to 
+            pipes[pi].physicsBody = SKPhysicsBody(texture: pipes[pi].texture!, size: pipes[pi].size)
+            pipes[pi].physicsBody?.isDynamic = false
+            pipes[pi].physicsBody?.linearDamping = 1.0
+            pipes[pi].physicsBody?.allowsRotation = false
+            pipes[pi].physicsBody?.categoryBitMask = CollisionCategory.Pipe
+            pipes[pi].physicsBody?.contactTestBitMask = CollisionCategory.Player
+            pipes[pi].physicsBody?.collisionBitMask = CollisionCategory.Player // There is no recovering from the ground
+
             if pi / 2 > 0 {
                 pipeFirst.addChild(pipes[pi])
             }
@@ -216,9 +226,13 @@ class GameScene: BaseScene {
             self.pipeFirst.run(self.forever, withKey: "pipe_moving")
             self.pipeSecond.run(self.delayedForever, withKey: "pipe_moving")
         }
+        let goPlayer = SKAction.customAction(withDuration: 0){
+            node, elapsedTime in
+            self.playerNode.physicsBody?.isDynamic = true
+        }
         
         /* waits for about 1 second before fading out */
-        tutorial[0].run(SKAction.sequence([braceforImpact, braceforImpact, fadeOut, braceforImpact, goPillars]))
+        tutorial[0].run(SKAction.sequence([braceforImpact, braceforImpact, fadeOut, braceforImpact, goPillars, goPlayer]))
         for i in 1..<tutorial.count {
             tutorial[i].run(SKAction.sequence([braceforImpact, braceforImpact, fadeOut]))
         }
@@ -229,6 +243,15 @@ class GameScene: BaseScene {
         playerNode.size.width *= playerRatio
         playerNode.anchorPoint = CGPoint(x: 0, y: 0.5)
         playerNode.position = CGPoint(x: 0.3 * w , y: 0.55 * h)
+        
+        playerNode.physicsBody = SKPhysicsBody(texture: playerNode.texture!, size: playerNode.size)
+        playerNode.physicsBody?.isDynamic = false
+        playerNode.physicsBody?.linearDamping = 1.0
+        playerNode.physicsBody?.allowsRotation = false
+        playerNode.physicsBody?.categoryBitMask = CollisionCategory.Player
+        playerNode.physicsBody?.contactTestBitMask = CollisionCategory.Ground | CollisionCategory.Pipe
+        playerNode.physicsBody?.collisionBitMask = CollisionCategory.Ground | CollisionCategory.Pipe// There is no recovering from the ground
+
         addChild(playerNode)
     }
     func parseScore()
@@ -243,7 +266,6 @@ class GameScene: BaseScene {
             else {
                 let newNumber = ScoreNumberNode(numeral, sc: true, prop: scoreProp * h)
                 scoreNodes.append(newNumber)
-                //addChild(newNumber)
             }
             numeral = left % 10
             left = (left - numeral) / 10
@@ -256,7 +278,6 @@ class GameScene: BaseScene {
         else {
             let newNumber = ScoreNumberNode(numeral, sc: true, prop: scoreProp * h)
             scoreNodes.append(newNumber)
-            //addChild(newNumber)
         }
     }
     func updateScore(){
@@ -270,7 +291,6 @@ class GameScene: BaseScene {
             }
             else {
                 parseScore()
-                print("Adding nodes \(scoreNodes.count)")
             }
             /* Repositions numbers with the new ensemble */
             var acc:CGFloat = 0
@@ -286,7 +306,6 @@ class GameScene: BaseScene {
         }
         else {
             parseScore()
-            print("Not adding nodes \(scoreNodes.count)")
         }
     }
     func touchDown(atPoint pos : CGPoint) {
@@ -330,3 +349,38 @@ class GameScene: BaseScene {
         }
     }
 }
+
+/*
+ * This extension implements the collision between physical bodies
+ */
+extension GameScene : SKPhysicsContactDelegate {
+    func didBegin(_ contact: SKPhysicsContact){
+        /*
+        let nodeB = contact.bodyB.node
+        if nodeB?.name == "POWER_UP_ORB" {
+            
+            run(orbPopAction)
+            
+            impulseCount += 1
+            impulseTextNode.text = "IMPULSES: \(impulseCount)"
+
+            score += 1
+            scoreTextNode.text = "SCORE: \(score)"
+
+            nodeB?.removeFromParent()
+        }
+        else if nodeB?.name == "BLACK_HOLE" {
+            let colorizeAction = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1.0, duration: 1)
+            playerNode.run(colorizeAction)
+            
+            // Cannot recover getting power orbs - this disables collision for this
+            // physics body
+            playerNode.physicsBody?.contactTestBitMask = 0
+            
+            impulseCount = 0
+            impulseTextNode.text = "IMPULSES: \(impulseCount)"
+        }*/
+    }
+    
+}
+
