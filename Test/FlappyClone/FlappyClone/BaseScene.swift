@@ -143,11 +143,13 @@ class BaseScene: SKScene {
         if let action = playerNode.action(forKey: "animation") {
             action.speed = 0
         }
+        playerNode.physicsBody?.isDynamic = false
     }
     func unpausePlayer(){
         if let action = playerNode.action(forKey: "animation") {
             action.speed = 1
         }
+        playerNode.physicsBody?.isDynamic = true
     }
 
     override func update(_ currentTime: TimeInterval) {

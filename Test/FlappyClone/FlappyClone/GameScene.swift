@@ -101,6 +101,7 @@ class GameScene: BaseScene {
         addChild(playBtn)
         pauseGround()
         pausePlayer()
+        playerNode.physicsBody!.isDynamic = false
         if let action = pipeFirst.action(forKey: "pipe_moving") {
             action.speed = 0
         }
@@ -143,23 +144,23 @@ class GameScene: BaseScene {
             // and now for the tricky part
             if(pi % 2 == 0){
                 //PipeDown
-                pipes[pi].anchorPoint = CGPoint(x:0, y: 1)
-                pipes[pi].position = CGPoint(x:0 , y: 0.33 * h)
+                pipes[pi].anchorPoint = CGPoint(x:0.5, y: 0.5)
+                pipes[pi].position = CGPoint(x: 0.5*pipes[pi].size.width , y: 0.33 * h - 0.5*pipes[pi].size.height)
             }
             else{
-                pipes[pi].anchorPoint = CGPoint(x:0, y: 0)
-                pipes[pi].position = CGPoint(x:0, y: 0.53 * h)
+                pipes[pi].anchorPoint = CGPoint(x:0.5, y: 0.5)
+                pipes[pi].position = CGPoint(x: 0.5*pipes[pi].size.width, y: 0.53 * h + 0.5*pipes[pi].size.height)
+                
             }
-            
-            // Adding physics (how difficult can that be?
-            // I just hope anchoring is not going to 
-            pipes[pi].physicsBody = SKPhysicsBody(texture: pipes[pi].texture!, size: pipes[pi].size)
             pipes[pi].physicsBody?.isDynamic = false
             pipes[pi].physicsBody?.linearDamping = 1.0
             pipes[pi].physicsBody?.allowsRotation = false
             pipes[pi].physicsBody?.categoryBitMask = CollisionCategory.Pipe
             pipes[pi].physicsBody?.contactTestBitMask = CollisionCategory.Player
             pipes[pi].physicsBody?.collisionBitMask = CollisionCategory.Player // There is no recovering from the ground
+
+            // Adding physics (how difficult can that be?
+            // I just hope anchoring is not going to 
 
             if pi / 2 > 0 {
                 pipeFirst.addChild(pipes[pi])
@@ -241,8 +242,8 @@ class GameScene: BaseScene {
         playerRatio = playerRatio * h / playerNode.size.height
         playerNode.size.height *= playerRatio
         playerNode.size.width *= playerRatio
-        playerNode.anchorPoint = CGPoint(x: 0, y: 0.5)
-        playerNode.position = CGPoint(x: 0.3 * w , y: 0.55 * h)
+        playerNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        playerNode.position = CGPoint(x: 0.3 * w + playerNode.size.width, y: 0.55 * h)
         
         playerNode.physicsBody = SKPhysicsBody(texture: playerNode.texture!, size: playerNode.size)
         playerNode.physicsBody?.isDynamic = false
@@ -318,6 +319,7 @@ class GameScene: BaseScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        playerNode.physicsBody?.applyImpulse(CGVector(dx:0.0,dy:40.0))
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
