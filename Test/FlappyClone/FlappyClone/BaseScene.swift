@@ -46,7 +46,7 @@ class BaseScene: SKScene {
         backgroundNode.size.height = (1 + bgHDisc) * frame.size.height
         backgroundNode.anchorPoint = CGPoint(x:0.5,y:0.0)
         backgroundNode.position = CGPoint(x: bgWPos * w, y: bgHPos * h - bgHDisc * h)
-        addChild(backgroundNode)
+        //addChild(backgroundNode)
         
         /*
          * Flappy Animation
@@ -70,6 +70,7 @@ class BaseScene: SKScene {
         ground01.size.height = gHProp * frame.size.height
         ground01.anchorPoint = CGPoint(x:0.0,y:0.0)
         ground01.position = CGPoint(x:0.0,y:0.0)
+        ground01.name = "Ground1"
         
         var testSize = ground01.size
         testSize.height *= 2 /* Experimental value */
@@ -98,7 +99,7 @@ class BaseScene: SKScene {
         ground02.size.height = gHProp * frame.size.height
         ground02.anchorPoint = CGPoint(x:0.0, y:0.0)
         ground02.position = CGPoint(x:frame.size.width, y:0.0)
-        
+        ground02.name = "Ground2"
         ground02.physicsBody = SKPhysicsBody(texture: ground02.texture!, size: testSize)
         ground02.physicsBody?.isDynamic = false
         ground02.physicsBody?.linearDamping = 1.0
@@ -143,13 +144,11 @@ class BaseScene: SKScene {
         if let action = playerNode.action(forKey: "animation") {
             action.speed = 0
         }
-        playerNode.physicsBody?.isDynamic = false
     }
     func unpausePlayer(){
         if let action = playerNode.action(forKey: "animation") {
             action.speed = 1
         }
-        playerNode.physicsBody?.isDynamic = true
     }
 
     override func update(_ currentTime: TimeInterval) {

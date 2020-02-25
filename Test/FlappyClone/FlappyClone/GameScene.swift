@@ -9,6 +9,7 @@ import CoreMotion
 class GameScene: BaseScene {
     var playerRatio:CGFloat = 0.045
     var gamePaused = false
+    var playerAlive = true
     
     var scoreNodes:[ScoreNumberNode] = []
     var currentScore:Int = 0
@@ -55,6 +56,11 @@ class GameScene: BaseScene {
     }
     override init(size: CGSize){
         super.init(size:size)
+        physicsWorld.gravity = CGVector(dx:0.0, dy:-5.0)
+        physicsWorld.contactDelegate = self
+
+        
+        playerAlive = true
         currentScore = 0
         /*
          * Implementing the things that are particular for this interface
@@ -96,31 +102,35 @@ class GameScene: BaseScene {
 
     }
     @objc func pauseBtnTap(){
-        print("Pause button has been pressed")
-        pauseBtn.removeFromParent()
-        addChild(playBtn)
-        pauseGround()
-        pausePlayer()
-        playerNode.physicsBody!.isDynamic = false
-        if let action = pipeFirst.action(forKey: "pipe_moving") {
-            action.speed = 0
-        }
-        if let action = pipeSecond.action(forKey: "pipe_moving") {
-            action.speed = 0
+        if(playerAlive)
+        {
+            pauseBtn.removeFromParent()
+            addChild(playBtn)
+            pauseGround()
+            pausePlayer()
+            playerNode.physicsBody!.isDynamic = false
+            if let action = pipeFirst.action(forKey: "pipe_moving") {
+                action.speed = 0
+            }
+            if let action = pipeSecond.action(forKey: "pipe_moving") {
+                action.speed = 0
+            }
         }
     }
     @objc func playBtnTap ()
     {
-        print("Play button has been pressed")
-        playBtn.removeFromParent()
-        addChild(pauseBtn)
-        unpauseGround()
-        unpausePlayer()
-        if let action = pipeFirst.action(forKey: "pipe_moving") {
-            action.speed = 1
-        }
-        if let action = pipeSecond.action(forKey: "pipe_moving") {
-            action.speed = 1
+        if(playerAlive){
+            playBtn.removeFromParent()
+            addChild(pauseBtn)
+            unpauseGround()
+            unpausePlayer()
+            playerNode.physicsBody!.isDynamic = true
+            if let action = pipeFirst.action(forKey: "pipe_moving") {
+                action.speed = 1
+            }
+            if let action = pipeSecond.action(forKey: "pipe_moving") {
+                action.speed = 1
+            }
         }
     }
     func generatePillars(){
@@ -149,15 +159,16 @@ class GameScene: BaseScene {
             }
             else{
                 pipes[pi].anchorPoint = CGPoint(x:0.5, y: 0.5)
-                pipes[pi].position = CGPoint(x: 0.5*pipes[pi].size.width, y: 0.53 * h + 0.5*pipes[pi].size.height)
+                pipes[pi].position = CGPoint(x: 0.5*pipes[pi].size.width, y: 0.58 * h + 0.5*pipes[pi].size.height)
                 
             }
+            pipes[pi].physicsBody = SKPhysicsBody(texture: pipes[pi].texture!, size: pipes[pi].size)
             pipes[pi].physicsBody?.isDynamic = false
             pipes[pi].physicsBody?.linearDamping = 1.0
             pipes[pi].physicsBody?.allowsRotation = false
             pipes[pi].physicsBody?.categoryBitMask = CollisionCategory.Pipe
             pipes[pi].physicsBody?.contactTestBitMask = CollisionCategory.Player
-            pipes[pi].physicsBody?.collisionBitMask = CollisionCategory.Player // There is no recovering from the ground
+            pipes[pi].physicsBody?.collisionBitMask = CollisionCategory.None
 
             // Adding physics (how difficult can that be?
             // I just hope anchoring is not going to 
@@ -244,14 +255,15 @@ class GameScene: BaseScene {
         playerNode.size.width *= playerRatio
         playerNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         playerNode.position = CGPoint(x: 0.3 * w + playerNode.size.width, y: 0.55 * h)
+        playerNode.name = "Player"
         
         playerNode.physicsBody = SKPhysicsBody(texture: playerNode.texture!, size: playerNode.size)
         playerNode.physicsBody?.isDynamic = false
         playerNode.physicsBody?.linearDamping = 1.0
         playerNode.physicsBody?.allowsRotation = false
         playerNode.physicsBody?.categoryBitMask = CollisionCategory.Player
-        playerNode.physicsBody?.contactTestBitMask = CollisionCategory.Ground | CollisionCategory.Pipe
-        playerNode.physicsBody?.collisionBitMask = CollisionCategory.Ground | CollisionCategory.Pipe// There is no recovering from the ground
+        playerNode.physicsBody?.contactTestBitMask = CollisionCategory.Pipe | CollisionCategory.Ground
+        playerNode.physicsBody?.collisionBitMask = CollisionCategory.Ground //| CollisionCategory.Pipe// There is no recovering from the ground
 
         addChild(playerNode)
     }
@@ -319,7 +331,9 @@ class GameScene: BaseScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        playerNode.physicsBody?.applyImpulse(CGVector(dx:0.0,dy:40.0))
+        if(playerAlive){
+            playerNode.physicsBody?.applyImpulse(CGVector(dx:0.0,dy:40.0))
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -338,13 +352,11 @@ class GameScene: BaseScene {
         let delta = pipeWidthProp * 0.25 * w
         
         if pipeFirst.name == "U" && pipeFirst.position.x - delta < playerNode.position.x && pipeFirst.position.x + delta > playerNode.position.x {
-            print("[First] The current score is: \(currentScore)" )
             pipeFirst.name = "C"
             currentScore += 1
             updateScore()
         }
         if pipeSecond.name == "U" && pipeSecond.position.x - delta < playerNode.position.x && pipeSecond.position.x + delta > playerNode.position.x {
-            print("[Second] The current score is: \(currentScore)" )
             pipeSecond.name = "C"
             currentScore += 1
             updateScore()
@@ -357,31 +369,25 @@ class GameScene: BaseScene {
  */
 extension GameScene : SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact){
-        /*
+        let nodeA = contact.bodyA.node
         let nodeB = contact.bodyB.node
-        if nodeB?.name == "POWER_UP_ORB" {
-            
-            run(orbPopAction)
-            
-            impulseCount += 1
-            impulseTextNode.text = "IMPULSES: \(impulseCount)"
-
-            score += 1
-            scoreTextNode.text = "SCORE: \(score)"
-
-            nodeB?.removeFromParent()
-        }
-        else if nodeB?.name == "BLACK_HOLE" {
-            let colorizeAction = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1.0, duration: 1)
-            playerNode.run(colorizeAction)
-            
-            // Cannot recover getting power orbs - this disables collision for this
-            // physics body
+        print("Collision between \(nodeA!.name) and \(nodeB!.name)")
+        if nodeB?.name == "Player" {
+            playerAlive = false
+            print("Player is dead")
+            pauseBtn.removeFromParent()
+            pauseGround()
+            pausePlayer()
             playerNode.physicsBody?.contactTestBitMask = 0
-            
-            impulseCount = 0
-            impulseTextNode.text = "IMPULSES: \(impulseCount)"
-        }*/
+            if let action = pipeFirst.action(forKey: "pipe_moving") {
+                action.speed = 0
+            }
+            if let action = pipeSecond.action(forKey: "pipe_moving") {
+                action.speed = 0
+            }
+            let bellyUp:SKAction = SKAction.rotate(toAngle: -CGFloat.pi, duration: 0.5)
+            playerNode.run(bellyUp)
+        }
     }
     
 }
