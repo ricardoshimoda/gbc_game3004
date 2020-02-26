@@ -13,12 +13,16 @@ import CoreMotion
 class GameScene: BaseScene {
     var playerRatio:CGFloat = 0.045
     var playerImpulse:Double = 20
+    let playerAudio = SKAudioNode(fileNamed: "Sounds/Wings.wav")
+    let pointAudio = SKAudioNode(fileNamed: "Sounds/Point.wav")
+    
     var gamePaused = false
     var playerAlive = true
     
     var scoreNodes:[ScoreNumberNode] = []
     var currentScore:Int = 0
     let scoreProp:CGFloat = 0.035
+    let bgAudio = SKAudioNode(fileNamed: "Sounds/Title.wav")
     
     let getReadyNode:[SKSpriteNode] = [
         SKSpriteNode(imageNamed: "getready01"),
@@ -82,6 +86,11 @@ class GameScene: BaseScene {
     }
     override init(size: CGSize){
         super.init(size:size)
+        
+    }
+    
+    
+    override func didMove(to view:SKView){
         physicsWorld.gravity = CGVector(dx:0.0, dy:-5.0)
         physicsWorld.contactDelegate = self
 
@@ -93,13 +102,20 @@ class GameScene: BaseScene {
          */
         generatePillars()
         super.addGround(pipeInterval/1.2)
-        // Ephemeral - is executed last
         getReady()
         addPlayer()
         updateScore()
         renderButtons()
+    }
+    
+    func configureSounds(){
+        bgAudio.autoplayLooped = true
+        bgAudio.run(SKAction.play())
+        addChild(bgAudio)
+        addChild(playerAudio)
         
     }
+    
     func renderButtons(){
         playButtonProp = playButtonProp * h/playTexture.size().height
         playBtn = FTButtonNode(
@@ -359,6 +375,7 @@ class GameScene: BaseScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if(playerAlive){
             playerNode.physicsBody?.applyImpulse(CGVector(dx:0.0, dy:playerImpulse))
+            playerAudio.run(SKAction.play())
         }
     }
     

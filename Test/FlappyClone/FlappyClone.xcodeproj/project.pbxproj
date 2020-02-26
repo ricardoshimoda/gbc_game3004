@@ -15,6 +15,7 @@
 		435BC3252400214F007D2F4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 435BC3232400214F007D2F4E /* LaunchScreen.storyboard */; };
 		435BC3302400214F007D2F4E /* FlappyCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435BC32F2400214F007D2F4E /* FlappyCloneTests.swift */; };
 		435BC33B24002150007D2F4E /* FlappyCloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435BC33A24002150007D2F4E /* FlappyCloneUITests.swift */; };
+		5793BC9B2407140C00683C5F /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 5793BC9A2407140C00683C5F /* Sounds */; };
 		57EC759B240048C80062B192 /* TitleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EC759A240048C80062B192 /* TitleScene.swift */; };
 		57EC759D24017A460062B192 /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EC759C24017A460062B192 /* BaseScene.swift */; };
 		57EC759F2401C36E0062B192 /* FTButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EC759E2401C36E0062B192 /* FTButtonNode.swift */; };
@@ -54,6 +55,7 @@
 		435BC33624002150007D2F4E /* FlappyCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlappyCloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		435BC33A24002150007D2F4E /* FlappyCloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlappyCloneUITests.swift; sourceTree = "<group>"; };
 		435BC33C24002150007D2F4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5793BC9A2407140C00683C5F /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Sounds; path = ../../../assets/FlappyClone/Sounds; sourceTree = "<group>"; };
 		57EC759A240048C80062B192 /* TitleScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleScene.swift; sourceTree = "<group>"; };
 		57EC759C24017A460062B192 /* BaseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
 		57EC759E2401C36E0062B192 /* FTButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTButtonNode.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				435BC31A2400214E007D2F4E /* GameScene.swift */,
 				435BC31C2400214E007D2F4E /* GameViewController.swift */,
 				57EC759E2401C36E0062B192 /* FTButtonNode.swift */,
+				5793BC9A2407140C00683C5F /* Sounds */,
 				435BC31E2400214E007D2F4E /* Main.storyboard */,
 				435BC3232400214F007D2F4E /* LaunchScreen.storyboard */,
 				435BC3262400214F007D2F4E /* Info.plist */,
@@ -249,6 +252,7 @@
 			files = (
 				435BC3202400214E007D2F4E /* Main.storyboard in Resources */,
 				57EC75A12402E2200062B192 /* Assets.xcassets in Resources */,
+				5793BC9B2407140C00683C5F /* Sounds in Resources */,
 				435BC3252400214F007D2F4E /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

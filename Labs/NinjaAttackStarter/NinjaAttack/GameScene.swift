@@ -96,7 +96,7 @@ class GameScene: SKScene {
     physicsWorld.gravity = .zero
     physicsWorld.contactDelegate = self
     run(SKAction.repeatForever(SKAction.sequence([SKAction.run(addMonster),SKAction.wait(forDuration:1.0)])))
-    let backgroundMusic = SKAudioNode(fileNamed: "background-music-aac.caf")
+    let backgroundMusic = SKAudioNode(fileNamed: "Upbeat.wav")
     backgroundMusic.autoplayLooped = true
     addChild(backgroundMusic)
   }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5736EF3D23E4F90A007EBC04 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5736EF3C23E4F90A007EBC04 /* GameOverScene.swift */; };
+		57E14BD6240715B500F83AE0 /* Upbeat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 57E14BD5240715B500F83AE0 /* Upbeat.wav */; };
 		5C2901831F8F6DE700803663 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2901821F8F6DE700803663 /* LaunchScreen.storyboard */; };
 		AFD63F872036493600E08C66 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD63F862036493600E08C66 /* GameViewController.swift */; };
 		AFD63F892036497100E08C66 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD63F882036497100E08C66 /* GameScene.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		5736EF3C23E4F90A007EBC04 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameOverScene.swift; path = NinjaAttack/GameOverScene.swift; sourceTree = "<group>"; };
+		57E14BD5240715B500F83AE0 /* Upbeat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Upbeat.wav; path = ../../../../assets/FlappyClone/Sounds/Upbeat.wav; sourceTree = "<group>"; };
 		5C2901821F8F6DE700803663 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = NinjaAttack/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFD63F862036493600E08C66 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = NinjaAttack/GameViewController.swift; sourceTree = "<group>"; };
 		AFD63F882036497100E08C66 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = NinjaAttack/GameScene.swift; sourceTree = "<group>"; };
@@ -46,6 +48,7 @@
 		AFD63F8C203649F800E08C66 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				57E14BD5240715B500F83AE0 /* Upbeat.wav */,
 				AFD63F8D203649F800E08C66 /* background-music-aac.caf */,
 				AFD63F8E203649F800E08C66 /* pew-pew-lei.caf */,
 			);
@@ -153,6 +156,7 @@
 				5C2901831F8F6DE700803663 /* LaunchScreen.storyboard in Resources */,
 				AFD63F90203649F800E08C66 /* pew-pew-lei.caf in Resources */,
 				D2A5F2091F4A9144005CD714 /* Main.storyboard in Resources */,
+				57E14BD6240715B500F83AE0 /* Upbeat.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

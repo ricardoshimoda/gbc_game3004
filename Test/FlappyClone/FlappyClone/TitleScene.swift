@@ -30,6 +30,8 @@ class TitleScene: BaseScene {
     let scoreTextureSelected: SKTexture! = SKTexture(imageNamed:"scorebtnpressed")
     let btnVPos:CGFloat = 0.17
     
+    let bgAudio = SKAudioNode(fileNamed: "Sounds/Title.wav")
+
     required init?(coder aDecoder : NSCoder){
         super.init(coder: aDecoder)
     }
@@ -39,11 +41,19 @@ class TitleScene: BaseScene {
         /*
          * Implementing the things which are particular for this intrerface
          */
+    }
+    
+    override func didMove(to view:SKView){
         super.addGround(2)
+        bgAudio.autoplayLooped = true
+        bgAudio.run(SKAction.play())
+        addChild(bgAudio)
+        
         addCopyright()
         addTitle()
         addButtons()
     }
+
     
     func addCopyright(){
         var acc:CGFloat = 0
