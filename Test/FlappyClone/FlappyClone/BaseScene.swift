@@ -46,7 +46,7 @@ class BaseScene: SKScene {
         backgroundNode.size.height = (1 + bgHDisc) * frame.size.height
         backgroundNode.anchorPoint = CGPoint(x:0.5,y:0.0)
         backgroundNode.position = CGPoint(x: bgWPos * w, y: bgHPos * h - bgHDisc * h)
-        //addChild(backgroundNode)
+        addChild(backgroundNode)
         
         /*
          * Flappy Animation

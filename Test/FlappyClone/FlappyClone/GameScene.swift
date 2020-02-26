@@ -4,10 +4,15 @@ import CoreMotion
 
 
 /*
+ * Bronze: 10-19 points
+ * Silver: 20-29 points
+ * Gold: 30-39 points
+ * Platinun: more than 40 points
  */
 
 class GameScene: BaseScene {
     var playerRatio:CGFloat = 0.045
+    var playerImpulse:Double = 20
     var gamePaused = false
     var playerAlive = true
     
@@ -50,6 +55,27 @@ class GameScene: BaseScene {
     let pauseTextureSelected:SKTexture = SKTexture(imageNamed: "pausebtnpressed")
     var playBtn : SKSpriteNode = SKSpriteNode()
     var pauseBtn : SKSpriteNode = SKSpriteNode()
+    
+    let gameOverNode:[SKSpriteNode] = [
+        SKSpriteNode(imageNamed: "gameover01"),
+        SKSpriteNode(imageNamed: "gameover02")
+    ]
+    let flash:SKSpriteNode = SKSpriteNode(imageNamed:"whitebg")
+    let medals:[SKSpriteNode] = [
+        SKSpriteNode(imageNamed: "medalbronze"),
+        SKSpriteNode(imageNamed: "medalsilver"),
+        SKSpriteNode(imageNamed: "medalgold"),
+        SKSpriteNode(imageNamed: "medalplatinum")
+    ]
+    let newbs:SKSpriteNode = SKSpriteNode(imageNamed:"newbestscore")
+    let scoreboard:SKSpriteNode = SKSpriteNode(imageNamed: "scoreboard")
+    
+    let okTexture:SKTexture = SKTexture(imageNamed: "okbtn")
+    let okTextureSelected:SKTexture = SKTexture(imageNamed: "okbtnpressed")
+    let shareTexture:SKTexture = SKTexture(imageNamed: "sharebtn")
+    let shareTextureSelected:SKTexture = SKTexture(imageNamed: "sharebtnpressed")
+    var okBtn : SKSpriteNode = SKSpriteNode()
+    var shareBtn : SKSpriteNode = SKSpriteNode()
 
     required init?(coder aDecoder : NSCoder){
         super.init(coder: aDecoder)
@@ -332,7 +358,7 @@ class GameScene: BaseScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if(playerAlive){
-            playerNode.physicsBody?.applyImpulse(CGVector(dx:0.0,dy:40.0))
+            playerNode.physicsBody?.applyImpulse(CGVector(dx:0.0, dy:playerImpulse))
         }
     }
     
@@ -364,29 +390,43 @@ class GameScene: BaseScene {
     }
 }
 
+
 /*
  * This extension implements the collision between physical bodies
  */
 extension GameScene : SKPhysicsContactDelegate {
+    func playerDeath()
+    {
+        pausePlayer()
+        playerNode.physicsBody?.contactTestBitMask = 0
+        let bellyUp:SKAction = SKAction.rotate(toAngle: -0.5*CGFloat.pi, duration: 0.5)
+        playerNode.run(bellyUp)
+    }
+    func gameResults(){
+        flash.size.width = (1 + bgHDisc) * frame.size.width
+        flash.size.height = (1 + bgHDisc) * frame.size.height
+        flash.anchorPoint = CGPoint(x:0.5,y:0.0)
+        flash.position = CGPoint(x: bgWPos * w, y: bgHPos * h - bgHDisc * h)
+        addChild(flash)
+        flash.run(SKAction.fadeOut(withDuration: 0.5))
+        
+    }
     func didBegin(_ contact: SKPhysicsContact){
-        let nodeA = contact.bodyA.node
-        let nodeB = contact.bodyB.node
-        print("Collision between \(nodeA!.name) and \(nodeB!.name)")
-        if nodeB?.name == "Player" {
-            playerAlive = false
-            print("Player is dead")
-            pauseBtn.removeFromParent()
-            pauseGround()
-            pausePlayer()
-            playerNode.physicsBody?.contactTestBitMask = 0
-            if let action = pipeFirst.action(forKey: "pipe_moving") {
-                action.speed = 0
+        if(playerAlive){
+            let nodeB = contact.bodyB.node
+            if nodeB?.name == "Player" {
+                playerAlive = false
+                pauseBtn.removeFromParent()
+                pauseGround()
+                if let action = pipeFirst.action(forKey: "pipe_moving") {
+                    action.speed = 0
+                }
+                if let action = pipeSecond.action(forKey: "pipe_moving") {
+                    action.speed = 0
+                }
+                playerDeath()
+                gameResults()
             }
-            if let action = pipeSecond.action(forKey: "pipe_moving") {
-                action.speed = 0
-            }
-            let bellyUp:SKAction = SKAction.rotate(toAngle: -CGFloat.pi, duration: 0.5)
-            playerNode.run(bellyUp)
         }
     }
     
