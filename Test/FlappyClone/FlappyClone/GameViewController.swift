@@ -29,12 +29,12 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         if let view = self.view as! SKView? {
             
-            titleScene = TitleScene(size:view.bounds.size)
-            titleScene.scaleMode = .aspectFill
-            view.presentScene(titleScene)
-            //gameScene = GameScene(size: view.bounds.size)
-            //gameScene.scaleMode = .aspectFill
-            //view.presentScene(gameScene)
+            //titleScene = TitleScene(size:view.bounds.size)
+            //titleScene.scaleMode = .aspectFill
+            //view.presentScene(titleScene)
+            gameScene = GameScene(size: view.bounds.size)
+            gameScene.scaleMode = .aspectFill
+            view.presentScene(gameScene)
             
             /* Common code for all scenes */
             view.ignoresSiblingOrder = false
