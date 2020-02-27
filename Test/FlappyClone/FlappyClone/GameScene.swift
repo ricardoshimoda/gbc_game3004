@@ -15,14 +15,16 @@ class GameScene: BaseScene {
     var playerImpulse:Double = 20
     let playerAudio = SKAudioNode(fileNamed: "Sounds/Wings.wav")
     let pointAudio = SKAudioNode(fileNamed: "Sounds/Point.wav")
-    
+    let deathAudio = SKAudioNode(fileNamed: "Sounds/Hit.wav")
+    let scoreAudio = SKAudioNode(fileNamed: "Sounds/sparkle.mp3")
+
     var gamePaused = false
     var playerAlive = true
     
     var scoreNodes:[ScoreNumberNode] = []
     var currentScore:Int = 0
     let scoreProp:CGFloat = 0.035
-    let bgAudio = SKAudioNode(fileNamed: "Sounds/Title.wav")
+    let bgAudio = SKAudioNode(fileNamed: "Sounds/Game.wav")
     
     let getReadyNode:[SKSpriteNode] = [
         SKSpriteNode(imageNamed: "getready01"),
@@ -49,7 +51,7 @@ class GameScene: BaseScene {
     let upArrow:SKSpriteNode = SKSpriteNode(imageNamed: "uparrow")
     let handUp:SKSpriteNode = SKSpriteNode(imageNamed: "handup")
     let tap:SKSpriteNode = SKSpriteNode(imageNamed: "tap")
-    let tapEffect:SKSpriteNode = SKSpriteNode(imageNamed: "tapeffect")
+    //let tapEffect:SKSpriteNode = SKSpriteNode(imageNamed: "tapeffect")
     var tutorial:[SKSpriteNode] = []
     
     var playButtonProp:CGFloat = 0.06
@@ -106,14 +108,24 @@ class GameScene: BaseScene {
         addPlayer()
         updateScore()
         renderButtons()
+        configureSounds()
     }
     
     func configureSounds(){
         bgAudio.autoplayLooped = true
         bgAudio.run(SKAction.play())
-        addChild(bgAudio)
-        addChild(playerAudio)
+        //addChild(bgAudio)
         
+        playerAudio.autoplayLooped = false
+        pointAudio.autoplayLooped = false
+        deathAudio.autoplayLooped = false
+        scoreAudio.autoplayLooped = false
+        
+        addChild(playerAudio)
+        addChild(pointAudio)
+        addChild(deathAudio)
+        addChild(scoreAudio)
+
     }
     
     func renderButtons(){
@@ -388,7 +400,15 @@ class GameScene: BaseScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
-    
+    func playScore(){
+        if(currentScore % 10 == 0)
+        {
+            scoreAudio.run(SKAction.play())
+        }
+        else{
+            pointAudio.run(SKAction.play())
+        }
+    }
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         super.update(currentTime)
@@ -398,11 +418,13 @@ class GameScene: BaseScene {
             pipeFirst.name = "C"
             currentScore += 1
             updateScore()
+            playScore()
         }
         if pipeSecond.name == "U" && pipeSecond.position.x - delta < playerNode.position.x && pipeSecond.position.x + delta > playerNode.position.x {
             pipeSecond.name = "C"
             currentScore += 1
             updateScore()
+            playScore()
         }
     }
 }
@@ -426,6 +448,8 @@ extension GameScene : SKPhysicsContactDelegate {
         flash.position = CGPoint(x: bgWPos * w, y: bgHPos * h - bgHDisc * h)
         addChild(flash)
         flash.run(SKAction.fadeOut(withDuration: 0.5))
+        deathAudio.run(SKAction.play())
+        bgAudio.run(SKAction.stop())
         
     }
     func didBegin(_ contact: SKPhysicsContact){
