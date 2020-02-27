@@ -68,14 +68,11 @@ class BaseScene: SKScene {
     func addGround(_ gDuration: TimeInterval ){
         ground01.size.width = frame.size.width
         ground01.size.height = gHProp * frame.size.height
-        ground01.anchorPoint = CGPoint(x:0.0,y:0.0)
-        ground01.position = CGPoint(x:0.0,y:0.0)
+        ground01.anchorPoint = CGPoint(x:0.5,y:0.5)
+        ground01.position = CGPoint(x:0.5*ground01.size.width,y:0.5*ground01.size.height)
         ground01.name = "Ground1"
         
-        var testSize = ground01.size
-        testSize.height *= 2 /* Experimental value */
-        
-        ground01.physicsBody = SKPhysicsBody(texture: ground01.texture!, size: testSize)
+        ground01.physicsBody = SKPhysicsBody(rectangleOf:ground01.size)
         ground01.physicsBody?.isDynamic = false
         ground01.physicsBody?.linearDamping = 1.0
         ground01.physicsBody?.allowsRotation = false
@@ -89,18 +86,18 @@ class BaseScene: SKScene {
         /*
          * Actions created to move the ground repeatedly
          */
-        let moveLeftActionRepeat01 = SKAction.moveTo(x: -size.width, duration: gDuration)
-        let moveBackActionRepeat01 = SKAction.moveTo(x: 0, duration: 0)
+        let moveLeftActionRepeat01 = SKAction.moveTo(x: -size.width + 0.5*ground01.size.width, duration: gDuration)
+        let moveBackActionRepeat01 = SKAction.moveTo(x: 0.5*ground01.size.width, duration: 0)
         let actionRepeatSequence01 = SKAction.sequence([moveLeftActionRepeat01, moveBackActionRepeat01])
         let moveActionRepeatForever01 = SKAction.repeatForever(actionRepeatSequence01)
         ground01.run(moveActionRepeatForever01, withKey: "ground_moving")
         
         ground02.size.width = frame.size.width
         ground02.size.height = gHProp * frame.size.height
-        ground02.anchorPoint = CGPoint(x:0.0, y:0.0)
-        ground02.position = CGPoint(x:frame.size.width, y:0.0)
+        ground02.anchorPoint = CGPoint(x:0.5, y:0.5)
+        ground02.position = CGPoint(x:frame.size.width + 0.5 * ground02.size.width, y:0.5*ground01.size.height)
         ground02.name = "Ground2"
-        ground02.physicsBody = SKPhysicsBody(texture: ground02.texture!, size: testSize)
+        ground02.physicsBody = SKPhysicsBody(rectangleOf: ground02.size)
         ground02.physicsBody?.isDynamic = false
         ground02.physicsBody?.linearDamping = 1.0
         ground02.physicsBody?.allowsRotation = false
@@ -112,8 +109,8 @@ class BaseScene: SKScene {
         /*
          * Actions created to move the ground repeatedly
          */
-        let moveLeftActionRepeat02 = SKAction.moveTo(x: 0, duration: gDuration)
-        let moveBackActionRepeat02 = SKAction.moveTo(x: size.width, duration: 0)
+        let moveLeftActionRepeat02 = SKAction.moveTo(x: 0.5*ground02.size.width, duration: gDuration)
+        let moveBackActionRepeat02 = SKAction.moveTo(x: size.width + 0.5*ground02.size.width, duration: 0)
         let actionRepeatSequence02 = SKAction.sequence([moveLeftActionRepeat02, moveBackActionRepeat02])
         let moveActionRepeatForever02 = SKAction.repeatForever(actionRepeatSequence02)
         ground02.run(moveActionRepeatForever02, withKey: "ground_moving")

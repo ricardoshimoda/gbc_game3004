@@ -17,6 +17,7 @@ class GameScene: BaseScene {
     let pointAudio = SKAudioNode(fileNamed: "Sounds/Point.wav")
     let deathAudio = SKAudioNode(fileNamed: "Sounds/Hit.wav")
     let scoreAudio = SKAudioNode(fileNamed: "Sounds/sparkle.mp3")
+    let plopAudio = SKAudioNode(fileNamed: "Sounds/Death.wav")
 
     var gamePaused = false
     var playerAlive = true
@@ -62,10 +63,7 @@ class GameScene: BaseScene {
     var playBtn : SKSpriteNode = SKSpriteNode()
     var pauseBtn : SKSpriteNode = SKSpriteNode()
     
-    let gameOverNode:[SKSpriteNode] = [
-        SKSpriteNode(imageNamed: "gameover01"),
-        SKSpriteNode(imageNamed: "gameover02")
-    ]
+    let gameOverNode:SKSpriteNode = SKSpriteNode(imageNamed: "deathtitle")
     let flash:SKSpriteNode = SKSpriteNode(imageNamed:"whitebg")
     let medals:[SKSpriteNode] = [
         SKSpriteNode(imageNamed: "medalbronze"),
@@ -98,16 +96,19 @@ class GameScene: BaseScene {
 
         
         playerAlive = true
-        currentScore = 0
+        currentScore = 50
         /*
          * Implementing the things that are particular for this interface
          */
         generatePillars()
         super.addGround(pipeInterval/1.2)
+        gameResults()
+        /*
         getReady()
         addPlayer()
         updateScore()
         renderButtons()
+        */
         configureSounds()
     }
     
@@ -120,11 +121,13 @@ class GameScene: BaseScene {
         pointAudio.autoplayLooped = false
         deathAudio.autoplayLooped = false
         scoreAudio.autoplayLooped = false
+        plopAudio.autoplayLooped = false
         
         addChild(playerAudio)
         addChild(pointAudio)
         addChild(deathAudio)
         addChild(scoreAudio)
+        addChild(plopAudio)
 
     }
     
@@ -216,7 +219,7 @@ class GameScene: BaseScene {
                 pipes[pi].position = CGPoint(x: 0.5*pipes[pi].size.width, y: 0.58 * h + 0.5*pipes[pi].size.height)
                 
             }
-            pipes[pi].physicsBody = SKPhysicsBody(texture: pipes[pi].texture!, size: pipes[pi].size)
+            pipes[pi].physicsBody = SKPhysicsBody(rectangleOf: pipes[pi].size)
             pipes[pi].physicsBody?.isDynamic = false
             pipes[pi].physicsBody?.linearDamping = 1.0
             pipes[pi].physicsBody?.allowsRotation = false
@@ -311,7 +314,7 @@ class GameScene: BaseScene {
         playerNode.position = CGPoint(x: 0.3 * w + playerNode.size.width, y: 0.55 * h)
         playerNode.name = "Player"
         
-        playerNode.physicsBody = SKPhysicsBody(texture: playerNode.texture!, size: playerNode.size)
+        playerNode.physicsBody = SKPhysicsBody(circleOfRadius: 0.5 * playerNode.size.width)
         playerNode.physicsBody?.isDynamic = false
         playerNode.physicsBody?.linearDamping = 1.0
         playerNode.physicsBody?.allowsRotation = false
@@ -440,8 +443,6 @@ extension GameScene : SKPhysicsContactDelegate {
         playerNode.physicsBody?.contactTestBitMask = 0
         let bellyUp:SKAction = SKAction.rotate(toAngle: -0.5*CGFloat.pi, duration: 0.5)
         playerNode.run(bellyUp)
-    }
-    func gameResults(){
         flash.size.width = (1 + bgHDisc) * frame.size.width
         flash.size.height = (1 + bgHDisc) * frame.size.height
         flash.anchorPoint = CGPoint(x:0.5,y:0.0)
@@ -450,6 +451,80 @@ extension GameScene : SKPhysicsContactDelegate {
         flash.run(SKAction.fadeOut(withDuration: 0.5))
         deathAudio.run(SKAction.play())
         bgAudio.run(SKAction.stop())
+    }
+    func parseGivenScore(parsingScore: Int) ->[SKSpriteNode]
+    {
+        var numeral = parsingScore % 10
+        var left = (parsingScore - numeral) / 10
+        var finalScoreNodes:[SKSpriteNode] = []
+        while left > 0  {
+            let newNumber = ScoreNumberNode(numeral, sc: false, prop: scoreProp * h)
+            finalScoreNodes.append(newNumber)
+            numeral = left % 10
+            left = (left - numeral) / 10
+        }
+        // last number
+        let newNumber = ScoreNumberNode(numeral, sc: true, prop: scoreProp * h)
+        finalScoreNodes.append(newNumber)
+        return finalScoreNodes
+    }
+    func gameResults(){
+        
+        let deathMessageRatio:CGFloat = 0.065 * h / gameOverNode.size.height
+        let deathMessageHPos:CGFloat = 0.7
+        gameOverNode.setScale(deathMessageRatio)
+        gameOverNode.position = CGPoint(x: 0.5 * w, y: deathMessageHPos * h)
+        let plopAudioAction = SKAction.customAction(withDuration: 0, actionBlock: {
+            node, elapsedTime in
+            self.plopAudio.run(SKAction.play())
+        })
+        gameOverNode.run(SKAction.sequence([
+            SKAction.fadeOut(withDuration:0),
+            SKAction.wait(forDuration: 0.5),
+            SKAction.group([
+                SKAction.fadeIn(withDuration: 0.5),
+                SKAction.moveBy(x: 0, y: -0.015*h, duration: 0.5),
+                plopAudioAction
+                ]),
+            SKAction.moveBy(x: 0, y: 0.015*h, duration: 0.5)]))
+        addChild(gameOverNode)
+
+        let scoreboardRatio = 0.7 * w / scoreboard.size.width
+        scoreboard.setScale(scoreboardRatio)
+        scoreboard.position = CGPoint(x: 0.5*w, y: 0.5*h)
+        addChild(scoreboard)
+        let medalIndex = (currentScore / 10)-1 > 3 ? 3: (currentScore / 10)-1
+        if(medalIndex >= 0){
+            medals[medalIndex].position = CGPoint(x:-0.125*scoreboard.size.width, y: -0.02*scoreboard.size.height)
+            scoreboard.addChild(medals[medalIndex])
+        }
+        let defaults = UserDefaults.standard
+        let highScore = defaults.integer(forKey: "highscore")
+        print("The highscore is \(highScore)")
+        if(highScore <= currentScore)
+        {
+            defaults.set(currentScore, forKey: "highscore")
+            newbs.position = CGPoint(x:0.07*scoreboard.size.width, y: -0.02*scoreboard.size.height)
+            scoreboard.addChild(newbs)
+        }
+        /*
+        let medals:[SKSpriteNode] = [
+            SKSpriteNode(imageNamed: "medalbronze"),
+            SKSpriteNode(imageNamed: "medalsilver"),
+            SKSpriteNode(imageNamed: "medalgold"),
+            SKSpriteNode(imageNamed: "medalplatinum")
+        ]
+        let newbs:SKSpriteNode = SKSpriteNode(imageNamed:"newbestscore")
+        let scoreboard:SKSpriteNode = SKSpriteNode(imageNamed: "scoreboard")
+        
+        let okTexture:SKTexture = SKTexture(imageNamed: "okbtn")
+        let okTextureSelected:SKTexture = SKTexture(imageNamed: "okbtnpressed")
+        let shareTexture:SKTexture = SKTexture(imageNamed: "sharebtn")
+        let shareTextureSelected:SKTexture = SKTexture(imageNamed: "sharebtnpressed")
+        var okBtn : SKSpriteNode = SKSpriteNode()
+        var shareBtn : SKSpriteNode = SKSpriteNode()
+        */
+        
         
     }
     func didBegin(_ contact: SKPhysicsContact){
