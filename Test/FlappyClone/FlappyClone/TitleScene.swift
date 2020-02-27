@@ -28,7 +28,6 @@ class TitleScene: BaseScene {
     let startTextureSelected: SKTexture! = SKTexture(imageNamed:"startbtnpressed")
     let scoreTexture: SKTexture! = SKTexture(imageNamed:"scorebtn")
     let scoreTextureSelected: SKTexture! = SKTexture(imageNamed:"scorebtnpressed")
-    let btnVPos:CGFloat = 0.17
     
     let bgAudio = SKAudioNode(fileNamed: "Sounds/Title.wav")
 

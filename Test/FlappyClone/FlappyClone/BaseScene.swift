@@ -12,7 +12,8 @@ class BaseScene: SKScene {
      * Originally all buttons are to be 40px in width and 16px in height
      */
     var buttonHProp:CGFloat = 0.25
-    
+    let btnVPos:CGFloat = 0.17
+
     let backgroundNode = SKSpriteNode(imageNamed: "background")
     let bgHDisc:CGFloat = 0.15
     let bgHPos:CGFloat = 0

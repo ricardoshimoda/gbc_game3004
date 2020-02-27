@@ -96,19 +96,16 @@ class GameScene: BaseScene {
 
         
         playerAlive = true
-        currentScore = 50
+        currentScore = 0
         /*
          * Implementing the things that are particular for this interface
          */
         generatePillars()
         super.addGround(pipeInterval/1.2)
-        gameResults()
-        /*
+        updateScore()
         getReady()
         addPlayer()
-        updateScore()
         renderButtons()
-        */
         configureSounds()
     }
     
@@ -452,19 +449,19 @@ extension GameScene : SKPhysicsContactDelegate {
         deathAudio.run(SKAction.play())
         bgAudio.run(SKAction.stop())
     }
-    func parseGivenScore(parsingScore: Int) ->[SKSpriteNode]
+    func parseGivenScore(_ parsingScore: Int) ->[SKSpriteNode]
     {
         var numeral = parsingScore % 10
         var left = (parsingScore - numeral) / 10
         var finalScoreNodes:[SKSpriteNode] = []
         while left > 0  {
-            let newNumber = ScoreNumberNode(numeral, sc: false, prop: scoreProp * h)
+            let newNumber = ScoreNumberNode(numeral, sc: false, prop: 0.012 * h)
             finalScoreNodes.append(newNumber)
             numeral = left % 10
             left = (left - numeral) / 10
         }
         // last number
-        let newNumber = ScoreNumberNode(numeral, sc: true, prop: scoreProp * h)
+        let newNumber = ScoreNumberNode(numeral, sc: false, prop: 0.012 * h)
         finalScoreNodes.append(newNumber)
         return finalScoreNodes
     }
@@ -488,11 +485,10 @@ extension GameScene : SKPhysicsContactDelegate {
                 ]),
             SKAction.moveBy(x: 0, y: 0.015*h, duration: 0.5)]))
         addChild(gameOverNode)
-
+        
         let scoreboardRatio = 0.7 * w / scoreboard.size.width
         scoreboard.setScale(scoreboardRatio)
-        scoreboard.position = CGPoint(x: 0.5*w, y: 0.5*h)
-        addChild(scoreboard)
+        scoreboard.position = CGPoint(x: 0.5*w, y: (0.5 - 1.5)*h)
         let medalIndex = (currentScore / 10)-1 > 3 ? 3: (currentScore / 10)-1
         if(medalIndex >= 0){
             medals[medalIndex].position = CGPoint(x:-0.125*scoreboard.size.width, y: -0.02*scoreboard.size.height)
@@ -507,25 +503,72 @@ extension GameScene : SKPhysicsContactDelegate {
             newbs.position = CGPoint(x:0.07*scoreboard.size.width, y: -0.02*scoreboard.size.height)
             scoreboard.addChild(newbs)
         }
-        /*
-        let medals:[SKSpriteNode] = [
-            SKSpriteNode(imageNamed: "medalbronze"),
-            SKSpriteNode(imageNamed: "medalsilver"),
-            SKSpriteNode(imageNamed: "medalgold"),
-            SKSpriteNode(imageNamed: "medalplatinum")
-        ]
-        let newbs:SKSpriteNode = SKSpriteNode(imageNamed:"newbestscore")
-        let scoreboard:SKSpriteNode = SKSpriteNode(imageNamed: "scoreboard")
+        let highScoreNodes = parseGivenScore(highScore)
+        var acc:CGFloat = 0
+        for hsn in 0..<highScoreNodes.count {
+            highScoreNodes[hsn].anchorPoint = CGPoint(x: 1, y: 0.5)
+            highScoreNodes[hsn].position = CGPoint(x:0.175*scoreboard.size.width - acc, y: -0.09*scoreboard.size.height)
+            acc += highScoreNodes[hsn].size.width
+            scoreboard.addChild(highScoreNodes[hsn])
+        }
+        // Restart
+        acc = 0
+        let currentScoreNodes = parseGivenScore(currentScore)
+        for csn in 0..<currentScoreNodes.count {
+            //    highScoreNodes[hsn].
+            currentScoreNodes[csn].anchorPoint = CGPoint(x: 1, y: 0.5)
+            currentScoreNodes[csn].position = CGPoint(x:0.175*scoreboard.size.width - acc, y: 0.0575*scoreboard.size.height)
+            acc += currentScoreNodes[csn].size.width
+            scoreboard.addChild(currentScoreNodes[csn])
+        }
         
-        let okTexture:SKTexture = SKTexture(imageNamed: "okbtn")
-        let okTextureSelected:SKTexture = SKTexture(imageNamed: "okbtnpressed")
-        let shareTexture:SKTexture = SKTexture(imageNamed: "sharebtn")
-        let shareTextureSelected:SKTexture = SKTexture(imageNamed: "sharebtnpressed")
-        var okBtn : SKSpriteNode = SKSpriteNode()
-        var shareBtn : SKSpriteNode = SKSpriteNode()
-        */
+        buttonHProp = buttonHProp * w / okTexture.size().width
+        okBtn = FTButtonNode(
+            defaultTexture: okTexture,
+            selectedTexture: okTextureSelected,
+            disabledTexture: okTexture,
+            prop: buttonHProp)
         
+        let ob = okBtn as? FTButtonNode
+        ob!.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(GameScene.okBtnTap))
         
+        okBtn.anchorPoint = CGPoint(x: 0.5,y: 0.5)
+        okBtn.position = CGPoint(x: 0.30*w, y: (btnVPos + 0.17 - 1.5) * h)
+        okBtn.zPosition = 1
+        okBtn.name = "okBtn"
+        
+        shareBtn = FTButtonNode(
+            defaultTexture: shareTexture,
+            selectedTexture: shareTextureSelected,
+            disabledTexture: shareTexture, prop: buttonHProp)
+        
+        let sb = shareBtn as? FTButtonNode
+        sb!.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(GameScene.shareBtnTap))
+        
+        shareBtn.anchorPoint = CGPoint(x: 0.5,y: 0.5)
+        shareBtn.position = CGPoint(x: 0.70*w, y: (btnVPos + 0.17 - 1.5) * h)
+        shareBtn.zPosition = 1
+        shareBtn.name = "shareBtn"
+        
+        let sbAct:SKAction = SKAction.moveBy(x:0, y:1.5*h, duration:1.5)
+
+        scoreboard.run(sbAct)
+        okBtn.run(sbAct)
+        shareBtn.run(sbAct)
+        addChild(scoreboard)
+        addChild(okBtn)
+        addChild(shareBtn)
+
+        
+    }
+    @objc func okBtnTap(){
+        print("Ok button pressed")
+        let transition = SKTransition.crossFade(withDuration: 3.0)
+        let titleScene = TitleScene(size: size)
+        view?.presentScene(titleScene, transition: transition)
+    }
+    @objc func shareBtnTap(){
+        print("Share button pressed")
     }
     func didBegin(_ contact: SKPhysicsContact){
         if(playerAlive){
