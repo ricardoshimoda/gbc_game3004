@@ -11,24 +11,30 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    var splashScene: SplashScene!
+    var selectionScene: SelectionScene!
+    var dialogScene: DialogScene!
+    var fightScene: FightScene!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Present the scene
-                view.presentScene(scene)
-            }
             
-            view.ignoresSiblingOrder = true
+            splashScene = SplashScene(size:view.bounds.size)
+            splashScene.scaleMode = .aspectFill
+            view.presentScene(splashScene)
             
+            //gameScene = GameScene(size: view.bounds.size)
+            //gameScene.scaleMode = .aspectFill
+            //view.presentScene(gameScene)
+            
+            /* Common code for all scenes */
+            view.ignoresSiblingOrder = false
             view.showsFPS = true
             view.showsNodeCount = true
+            view.showsPhysics = true
         }
     }
 
@@ -38,9 +44,9 @@ class GameViewController: UIViewController {
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
+            return .landscape
         } else {
-            return .all
+            return .landscape
         }
     }
 

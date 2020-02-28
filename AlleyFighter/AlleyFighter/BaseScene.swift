@@ -1,9 +1,21 @@
-//
-//  BaseScene.swift
-//  AlleyFighter
-//
-//  Created by Ricardo Shimoda Nakasako on 2020-02-28.
-//  Copyright © 2020 Ricardo Shimoda Nakasako. All rights reserved.
-//
+import SpriteKit
+import GameplayKit
 
-import Foundation
+/*
+ */
+class BaseScene: SKScene {
+    /*
+     * Initializes the scene
+     */
+    var h:CGFloat = 0
+    var w:CGFloat = 0
+    required init?(coder aDecoder : NSCoder){
+        super.init(coder: aDecoder)
+    }
+    override init(size: CGSize){
+        super.init(size:size)
+        h = size.height
+        w = size.width
+    }
+
+}
