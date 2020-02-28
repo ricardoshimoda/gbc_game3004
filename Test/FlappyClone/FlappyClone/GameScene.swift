@@ -495,10 +495,11 @@ extension GameScene : SKPhysicsContactDelegate {
             scoreboard.addChild(medals[medalIndex])
         }
         let defaults = UserDefaults.standard
-        let highScore = defaults.integer(forKey: "highscore")
+        var highScore = defaults.integer(forKey: "highscore")
         print("The highscore is \(highScore)")
         if(highScore <= currentScore)
         {
+            highScore = currentScore
             defaults.set(currentScore, forKey: "highscore")
             newbs.position = CGPoint(x:0.07*scoreboard.size.width, y: -0.02*scoreboard.size.height)
             scoreboard.addChild(newbs)

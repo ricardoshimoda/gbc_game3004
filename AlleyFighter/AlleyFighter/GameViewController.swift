@@ -22,9 +22,9 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             
-            splashScene = SplashScene(size:view.bounds.size)
-            splashScene.scaleMode = .aspectFill
-            view.presentScene(splashScene)
+            selectionScene = SelectionScene(size:view.bounds.size)
+            selectionScene.scaleMode = .aspectFill
+            view.presentScene(selectionScene)
             
             //gameScene = GameScene(size: view.bounds.size)
             //gameScene.scaleMode = .aspectFill

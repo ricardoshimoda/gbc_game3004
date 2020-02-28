@@ -4,8 +4,6 @@ import GameplayKit
 /*
  */
 class SplashScene: BaseScene {
-    
-    
     let slap = SKAudioNode(fileNamed: "Sounds/Splash/Slap.wav")
     let bgMusic = SKAudioNode(fileNamed: "Sounds/Splash/TitleSoundtrack.wav")
     let bgImage = SKSpriteNode(imageNamed: "TitleScreen")
@@ -49,26 +47,11 @@ class SplashScene: BaseScene {
         addChild(flash)
 
     }
-    func touchDown(atPoint pos : CGPoint) {
-        
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Goes to selection screen
+        let transition = SKTransition.crossFade(withDuration: 1.0)
+        let selectionScene = SelectionScene(size: size)
+        view?.presentScene(selectionScene, transition: transition)
     }
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
