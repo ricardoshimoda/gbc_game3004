@@ -22,10 +22,14 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             
-            selectionScene = SelectionScene(size:view.bounds.size)
-            selectionScene.scaleMode = .aspectFill
-            view.presentScene(selectionScene)
+            dialogScene = DialogScene(size:view.bounds.size)
+            dialogScene.scaleMode = .aspectFill
+            view.presentScene(dialogScene)
             
+            //selectionScene = SelectionScene(size:view.bounds.size)
+            //selectionScene.scaleMode = .aspectFill
+            //view.presentScene(selectionScene)
+
             //gameScene = GameScene(size: view.bounds.size)
             //gameScene.scaleMode = .aspectFill
             //view.presentScene(gameScene)
