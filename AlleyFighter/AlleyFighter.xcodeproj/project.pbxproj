@@ -17,6 +17,8 @@
 		57E14BF3240B1B0600F83AE0 /* Ryu.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57E14BF0240B1B0600F83AE0 /* Ryu.ttf */; };
 		57E14BF4240B1B0600F83AE0 /* Blanka.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57E14BF1240B1B0600F83AE0 /* Blanka.ttf */; };
 		57E14BF5240B1B0600F83AE0 /* ChunLi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57E14BF2240B1B0600F83AE0 /* ChunLi.ttf */; };
+		57E14BF7240B6B1600F83AE0 /* Fighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E14BF6240B6B1600F83AE0 /* Fighter.swift */; };
+		57E6D20B240C0F100098CB08 /* timer.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57E6D20A240C0F100098CB08 /* timer.ttf */; };
 		57EC7583240032910062B192 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EC7582240032910062B192 /* AppDelegate.swift */; };
 		57EC7587240032910062B192 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57EC7586240032910062B192 /* Actions.sks */; };
 		57EC758B240032910062B192 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EC758A240032910062B192 /* GameViewController.swift */; };
@@ -36,6 +38,8 @@
 		57E14BF0240B1B0600F83AE0 /* Ryu.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ryu.ttf; path = ../../assets/AlleyFighter/Fonts/Ryu.ttf; sourceTree = "<group>"; };
 		57E14BF1240B1B0600F83AE0 /* Blanka.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Blanka.ttf; path = ../../assets/AlleyFighter/Fonts/Blanka.ttf; sourceTree = "<group>"; };
 		57E14BF2240B1B0600F83AE0 /* ChunLi.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ChunLi.ttf; path = ../../assets/AlleyFighter/Fonts/ChunLi.ttf; sourceTree = "<group>"; };
+		57E14BF6240B6B1600F83AE0 /* Fighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fighter.swift; sourceTree = "<group>"; };
+		57E6D20A240C0F100098CB08 /* timer.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = timer.ttf; path = "../../assets/AlleyFighter/Fonts/01-digit/timer.ttf"; sourceTree = "<group>"; };
 		57EC757F240032910062B192 /* AlleyFighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlleyFighter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57EC7582240032910062B192 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57EC7586240032910062B192 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -87,9 +91,11 @@
 				57E14BF1240B1B0600F83AE0 /* Blanka.ttf */,
 				57E14BF2240B1B0600F83AE0 /* ChunLi.ttf */,
 				57E14BF0240B1B0600F83AE0 /* Ryu.ttf */,
+				57E6D20A240C0F100098CB08 /* timer.ttf */,
 				57E14BE12408C26800F83AE0 /* SelectionScene.swift */,
 				57E14BE32408C28B00F83AE0 /* DialogScene.swift */,
 				57E14BE52408C2A700F83AE0 /* FightScene.swift */,
+				57E14BF6240B6B1600F83AE0 /* Fighter.swift */,
 				57E14BE72408C4E100F83AE0 /* FTButtonNode.swift */,
 				57E14BDD2408BBB000F83AE0 /* Sounds */,
 				57EC758F240032950062B192 /* Assets.xcassets */,
@@ -163,6 +169,7 @@
 				57E14BF4240B1B0600F83AE0 /* Blanka.ttf in Resources */,
 				57EC7593240032950062B192 /* LaunchScreen.storyboard in Resources */,
 				57EC7587240032910062B192 /* Actions.sks in Resources */,
+				57E6D20B240C0F100098CB08 /* timer.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57E14BE82408C4E100F83AE0 /* FTButtonNode.swift in Sources */,
+				57E14BF7240B6B1600F83AE0 /* Fighter.swift in Sources */,
 				57E14BE22408C26800F83AE0 /* SelectionScene.swift in Sources */,
 				57E14BE42408C28B00F83AE0 /* DialogScene.swift in Sources */,
 				57E14BEF2409600600F83AE0 /* BaseScene.swift in Sources */,

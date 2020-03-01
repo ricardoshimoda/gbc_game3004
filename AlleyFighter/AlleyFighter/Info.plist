@@ -7,6 +7,7 @@
 		<string>Ryu.ttf</string>
 		<string>ChunLi.ttf</string>
 		<string>Blanka.ttf</string>
+		<string>timer.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
