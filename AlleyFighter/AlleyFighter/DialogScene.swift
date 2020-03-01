@@ -86,13 +86,8 @@ class DialogScene: BaseScene {
         super.init(size:size)
     }
     override func didMove(to view:SKView){
-        /*
         idxP1 = defaults.integer(forKey:"P1")
         idxP2 = defaults.integer(forKey:"P2")
-        */
-
-        idxP1 = 2
-        idxP2 = 2
 
         bgMusic[idxP1].autoplayLooped = true
         addChild(bgMusic[idxP1])

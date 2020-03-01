@@ -1,8 +1,6 @@
 import SpriteKit
 import GameplayKit
 
-/*
- */
 class FightScene: SKScene {
     /*
      * Initializes the scene

@@ -22,17 +22,17 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             
-            dialogScene = DialogScene(size:view.bounds.size)
-            dialogScene.scaleMode = .aspectFill
-            view.presentScene(dialogScene)
+            //dialogScene = DialogScene(size:view.bounds.size)
+            //dialogScene.scaleMode = .aspectFill
+            //view.presentScene(dialogScene)
             
             //selectionScene = SelectionScene(size:view.bounds.size)
             //selectionScene.scaleMode = .aspectFill
             //view.presentScene(selectionScene)
 
-            //gameScene = GameScene(size: view.bounds.size)
-            //gameScene.scaleMode = .aspectFill
-            //view.presentScene(gameScene)
+            splashScene = SplashScene(size: view.bounds.size)
+            splashScene.scaleMode = .aspectFill
+            view.presentScene(splashScene)
             
             /* Common code for all scenes */
             view.ignoresSiblingOrder = false
