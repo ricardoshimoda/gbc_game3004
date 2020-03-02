@@ -5,7 +5,11 @@ class FightScene: BaseScene {
     
     var isOn = true
     
-    let bgMusic = SKAudioNode(fileNamed: "Sounds/Fight/BgFight.wav")
+    let bgMusic[SKAudioNode] = [
+        SKAudioNode(fileNamed: "Sounds/Fight/Ryu.mp3"),
+        SKAudioNode(fileNamed: "Sounds/Fight/ChunLi.mp3"),
+        SKAudioNode(fileNamed: "Sounds/Fight/Blanka.mp3"),
+    ]
     let bgImage:[SKSpriteNode] = [
         SKSpriteNode(imageNamed: "RyuDStage"),
         SKSpriteNode(imageNamed: "ChunLiDStage"),
@@ -103,10 +107,10 @@ class FightScene: BaseScene {
         idxP1 = defaults.integer(forKey:"P1")
         idxP2 = defaults.integer(forKey:"P2")
 
-        bgMusic.autoplayLooped = true
-        bgMusic.run(SKAction.changeVolume(to:0.4, duration: 0))
-        addChild(bgMusic)
-        bgMusic.run(SKAction.play())
+        bgMusic[idxP1].autoplayLooped = true
+        bgMusic[idxP1].run(SKAction.changeVolume(to:0.4, duration: 0))
+        addChild(bgMusic[idxP1])
+        bgMusic[idxP1].run(SKAction.play())
         
         bgImage[idxP1].size.width = w
         bgImage[idxP1].size.height = h
@@ -258,7 +262,7 @@ class FightScene: BaseScene {
         isOn = false
         P1[idxP1].removeAllActions()
         P2[idxP2].removeAllActions()
-        bgMusic.run(SKAction.stop())
+        bgMusic[idxP1].run(SKAction.stop())
         self.removeAllActions()
         
         let endPanel = SKSpriteNode(imageNamed: "GameOver")
