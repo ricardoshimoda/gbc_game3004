@@ -94,7 +94,7 @@ class FTButtonNode: SKSpriteNode {
         }
 
         let touch: AnyObject! = touches.first
-        let touchLocation = touch.location(in: self)
+        let touchLocation = touch.location(in: parent!)
 
         if (frame.contains(touchLocation)) {
             isSelected = true

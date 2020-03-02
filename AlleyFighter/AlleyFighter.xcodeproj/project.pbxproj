@@ -19,6 +19,7 @@
 		57E14BF5240B1B0600F83AE0 /* ChunLi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57E14BF2240B1B0600F83AE0 /* ChunLi.ttf */; };
 		57E14BF7240B6B1600F83AE0 /* Fighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E14BF6240B6B1600F83AE0 /* Fighter.swift */; };
 		57E6D20B240C0F100098CB08 /* timer.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57E6D20A240C0F100098CB08 /* timer.ttf */; };
+		57E6D20D240C5F250098CB08 /* CollisionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E6D20C240C5F250098CB08 /* CollisionCategory.swift */; };
 		57EC7583240032910062B192 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EC7582240032910062B192 /* AppDelegate.swift */; };
 		57EC7587240032910062B192 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57EC7586240032910062B192 /* Actions.sks */; };
 		57EC758B240032910062B192 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EC758A240032910062B192 /* GameViewController.swift */; };
@@ -40,6 +41,7 @@
 		57E14BF2240B1B0600F83AE0 /* ChunLi.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ChunLi.ttf; path = ../../assets/AlleyFighter/Fonts/ChunLi.ttf; sourceTree = "<group>"; };
 		57E14BF6240B6B1600F83AE0 /* Fighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fighter.swift; sourceTree = "<group>"; };
 		57E6D20A240C0F100098CB08 /* timer.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = timer.ttf; path = "../../assets/AlleyFighter/Fonts/01-digit/timer.ttf"; sourceTree = "<group>"; };
+		57E6D20C240C5F250098CB08 /* CollisionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionCategory.swift; sourceTree = "<group>"; };
 		57EC757F240032910062B192 /* AlleyFighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlleyFighter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57EC7582240032910062B192 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57EC7586240032910062B192 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				57E14BE72408C4E100F83AE0 /* FTButtonNode.swift */,
 				57E14BDD2408BBB000F83AE0 /* Sounds */,
 				57EC758F240032950062B192 /* Assets.xcassets */,
+				57E6D20C240C5F250098CB08 /* CollisionCategory.swift */,
 			);
 			path = AlleyFighter;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 				57E14BE42408C28B00F83AE0 /* DialogScene.swift in Sources */,
 				57E14BEF2409600600F83AE0 /* BaseScene.swift in Sources */,
 				57E14BE62408C2A700F83AE0 /* FightScene.swift in Sources */,
+				57E6D20D240C5F250098CB08 /* CollisionCategory.swift in Sources */,
 				57E14BE02408C24600F83AE0 /* SplashScene.swift in Sources */,
 				57EC758B240032910062B192 /* GameViewController.swift in Sources */,
 				57EC7583240032910062B192 /* AppDelegate.swift in Sources */,
