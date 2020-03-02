@@ -3,6 +3,10 @@ import GameplayKit
 
 class Fighter: SKSpriteNode {
     
+    let physicsCenter:[CGFloat] = [
+        0.18,0.18,-0.05
+    ]
+    
     let punchSound = SKAudioNode(fileNamed: "Sounds/Fight/Hit.wav")
     let missSound = SKAudioNode(fileNamed: "Sounds/Fight/Miss.wav")
     
@@ -58,9 +62,11 @@ class Fighter: SKSpriteNode {
         super.init(texture: idleFrames[0], color: UIColor.white, size: idleFrames[0].size())
                 
         punchSound.autoplayLooped = false;
+        punchSound.run(SKAction.changeVolume(to: 4, duration: 0))
         addChild(punchSound)
 
         missSound.autoplayLooped = false;
+        missSound.run(SKAction.changeVolume(to:4, duration:0))
         addChild(missSound)
         
         for i in 0..<punch {
@@ -91,7 +97,9 @@ class Fighter: SKSpriteNode {
         run(idleAnim, withKey: "animation")
         
         let bodySize = CGSize(width: 0.5 * size.width, height: size.height)
-        let bodyCenter = side == 1 ? CGPoint(x:-0.18*size.width,y:0) : CGPoint(x:0.18*size.width,y:0)
+        let bodyCenter = side == 1 ?
+            CGPoint(x:-physicsCenter[id]*size.width,y:0) :
+            CGPoint(x: physicsCenter[id]*size.width,y:0)
         
         physicsBody = SKPhysicsBody(rectangleOf: bodySize, center: bodyCenter)
         physicsBody?.isDynamic = true

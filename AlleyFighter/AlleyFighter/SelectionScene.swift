@@ -47,6 +47,7 @@ class SelectionScene: BaseScene {
         defaults.set(-1, forKey: "P2")
 
         bgMusic.autoplayLooped = true
+        bgMusic.run(SKAction.changeVolume(to: 4, duration: 0))
         addChild(bgMusic)
         bgMusic.run(SKAction.play())
         

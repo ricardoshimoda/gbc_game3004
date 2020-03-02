@@ -11,6 +11,7 @@ class FightScene: BaseScene {
         SKSpriteNode(imageNamed: "ChunLiDStage"),
         SKSpriteNode(imageNamed: "BlankaDStage"),
     ]
+    var finalSong = SKAudioNode(fileNamed: "Sounds/Fight/Victory.mp3")
 
     /*
      * Initializes the scene
@@ -66,6 +67,8 @@ class FightScene: BaseScene {
     let playerSpeed:CGFloat = 100;
     var moveRight = false;
     var moveLeft = false;
+    var moveBotRight = false;
+    var moveBotLeft = false;
 
     let hBar1 = SKSpriteNode(imageNamed: "Lifebar")
     var hBar1OrWidth:CGFloat = 100
@@ -100,9 +103,10 @@ class FightScene: BaseScene {
         idxP1 = defaults.integer(forKey:"P1")
         idxP2 = defaults.integer(forKey:"P2")
 
-        //bgMusic.autoplayLooped = true
-        //addChild(bgMusic)
-        //bgMusic.run(SKAction.play())
+        bgMusic.autoplayLooped = true
+        bgMusic.run(SKAction.changeVolume(to:0.4, duration: 0))
+        addChild(bgMusic)
+        bgMusic.run(SKAction.play())
         
         bgImage[idxP1].size.width = w
         bgImage[idxP1].size.height = h
@@ -112,6 +116,59 @@ class FightScene: BaseScene {
     
         createPlayers()
         createHUD()
+        verySimpleAI()
+    }
+    func verySimpleAI(){
+        let moveBotLeftAc = SKAction.customAction(withDuration: 0, actionBlock: {
+            node, elapsedTime in
+            self.moveBotLeft = true
+            self.moveBotRight = false
+            self.P2[self.idxP2].walk()
+        })
+        let moveBotRightAc = SKAction.customAction(withDuration: 0, actionBlock: {
+            node, elapsedTime in
+            self.moveBotLeft = false
+            self.moveBotRight = true
+            self.P2[self.idxP2].walk()
+        })
+        let moveBotStop = SKAction.customAction(withDuration: 0, actionBlock: {
+            node, elapsedTime in
+            self.moveBotLeft = false
+            self.moveBotRight = false
+            self.P2[self.idxP2].stopWalk()
+        })
+        let botBlock = SKAction.customAction(withDuration: 0, actionBlock: {
+            node, elapsedTime in
+            self.P2[self.idxP2].block()
+        })
+        let botRemoveBlock = SKAction.customAction(withDuration: 0, actionBlock: {
+            node, elapsedTime in
+            self.P2[self.idxP2].stopBlock()
+        })
+        let botPunch = SKAction.customAction(withDuration: 0, actionBlock: {
+            node, elapsedTime in
+            self.P2[self.idxP2].punch()
+        })
+        let botIdle = SKAction.customAction(withDuration: 0, actionBlock: {
+            node, elapsedTime in
+            self.P2[self.idxP2].punch()
+        })
+        let botActions = SKAction.sequence([
+            SKAction.wait(forDuration: 2),
+            moveBotLeftAc,
+            SKAction.wait(forDuration: 2),
+            moveBotRightAc,
+            SKAction.wait(forDuration: 2),
+            moveBotStop,
+            botBlock,
+            SKAction.wait(forDuration: 2),
+            botRemoveBlock,
+            SKAction.wait(forDuration: 0.5),
+            botPunch,
+            botIdle,
+            SKAction.wait(forDuration: 1),
+        ])
+        self.run(SKAction.repeatForever(botActions), withKey: "AI")
     }
     func createPlayers(){
         let prop1 = 0.65*h/P1[idxP1].size.height
@@ -201,11 +258,13 @@ class FightScene: BaseScene {
         isOn = false
         P1[idxP1].removeAllActions()
         P2[idxP2].removeAllActions()
+        bgMusic.run(SKAction.stop())
+        self.removeAllActions()
         
         let endPanel = SKSpriteNode(imageNamed: "GameOver")
         let epProp:CGFloat = 0.9*h/endPanel.size.height
         endPanel.setScale(epProp)
-        endPanel.position = CGPoint(x:0.5*w,y:0.5*h)
+        endPanel.position = CGPoint(x:0.5*w,y:1.5*h)
         
 
         let btnStartTxt = SKTexture(imageNamed:"Start")
@@ -220,13 +279,13 @@ class FightScene: BaseScene {
         
         var idxP1F = 0
         var idxP2F = 1
-        var finalSong = SKAudioNode(fileNamed: "Sounds/Fight/Victory.mp3")
         if(P1[idxP1].health < P2[idxP2].health){
             idxP1F = 1
             idxP2F = 0
             finalSong = SKAudioNode(fileNamed: "Sounds/Fight/Defeat.mp3")
         }
         finalSong.autoplayLooped = false
+        finalSong.run(SKAction.changeVolume(to: 5, duration: 0))
         P1Outcome[idxP1F][idxP1].setScale(0.4*h/(P1Outcome[idxP1F][idxP1].size.height * epProp))
         P1Outcome[idxP1F][idxP1].position = CGPoint(x:-0.22*endPanel.size.width, y:0)
     
@@ -235,8 +294,17 @@ class FightScene: BaseScene {
         
         endPanel.addChild(P1Outcome[idxP1F][idxP1])
         endPanel.addChild(P2Outcome[idxP2F][idxP2])
+        
         endPanel.addChild(finalSong)
-        finalSong.run(SKAction.play())
+        let finalSongAction = SKAction.customAction(withDuration: 0, actionBlock: {
+            node, elapsedTime in
+            self.finalSong.run(SKAction.play())
+        })
+        let panelAction = SKAction.group([
+            SKAction.move(to: CGPoint(x:0.5*w, y:0.5*h), duration: 1),
+            finalSongAction
+        ])
+        endPanel.run(panelAction)
     }
     @objc func startPressed(){
         // Go To Selection
@@ -301,7 +369,11 @@ class FightScene: BaseScene {
                 dt = (currentTime - lastTime)
                 second += dt
             }
+            else{
+                dt=0
+            }
             lastTime = currentTime
+
             if(second > 1)
             {
                 timer -= 1
@@ -332,6 +404,19 @@ class FightScene: BaseScene {
                 P1[idxP1].position.x -= playerSpeed * CGFloat(dt)
                 if(P1[idxP1].position.x < 0.5 * P1[idxP1].size.width + 0.02 * w){
                     P1[idxP1].position.x = 0.5 * P1[idxP1].size.width + 0.02 * w
+                }
+            }
+            /* Caps bot movement */
+            if(moveBotRight){
+                P2[idxP2].position.x += playerSpeed * CGFloat(dt)
+                if(P2[idxP2].position.x > 0.98 * w - 0.5 * P2[idxP2].size.width ){
+                    P2[idxP2].position.x = 0.98 * w - 0.5 * P2[idxP2].size.width
+                }
+            }
+            if(moveBotLeft){
+                P2[idxP2].position.x -= playerSpeed * CGFloat(dt)
+                if(P2[idxP2].position.x < P1[idxP1].position.x + 0.01 * w){
+                    P2[idxP2].position.x = P1[idxP1].position.x + 0.01 * w
                 }
             }
         }
