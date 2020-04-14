@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="100" height="12" tilewidth="128" tileheight="128" infinite="0" nextlayerid="3" nextobjectid="114">
+ <tileset firstgid="1" name="Cyber-1" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="Tiles/Tile (1).png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="name" value="Ground"/>
+    <property name="source" value="Tiles/Tile (1).png"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2" name="Cyber-2" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="Tiles/Tile (2).png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="name" value="Ground"/>
+    <property name="source" value="Tiles/Tile (2).png"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="3" name="Cyber-3" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="Tiles/Tile (3).png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="collision" value="false"/>
+    <property name="name" value="Ground"/>
+    <property name="source" value="Tiles/Tile (3).png"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4" name="Cyber-4" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="Tiles/Tile (4).png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="collision" value="false"/>
+    <property name="name" value="Ground"/>
+    <property name="source" value="Tiles/Tile (4).png"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="5" name="Cyber-5" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="Tiles/Tile (5).png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="collision" value="false"/>
+    <property name="name" value="Ground"/>
+    <property name="source" value="Tiles/Tile (5).png"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="6" name="Cyber-6" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="Tiles/Tile (6).png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="name" value="Ground"/>
+    <property name="source" value="Tiles/Tile (6).png"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="7" name="Cyber-12" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="Tiles/Tile (12).png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="name" value="Ground"/>
+    <property name="source" value="Tiles/Tile (12).png"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="8" name="Cyber-13" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="Tiles/Tile (13).png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="name" value="Ground"/>
+    <property name="source" value="Tiles/Tile (13).png"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="9" name="cyber-14" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="Tiles/Tile (14).png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="name" value="Ground"/>
+    <property name="source" value="Tiles/Tile (14).png"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="10" name="Box" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="Objects/Box.png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="name" value="Collectible"/>
+    <property name="source" value="Objects/Box.png"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="11" name="Saw" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="Objects/Saw.png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="name" value="Enemy"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="12" name="DoorUnlocked" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="Objects/DoorUnlocked.png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="name" value="Goal"/>
+    <property name="source" value="Objects/DoorUnlocked.png"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="100" height="12">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Objects">
+  <object id="2" gid="1" x="0" y="1408" width="128" height="128"/>
+  <object id="3" gid="2" x="128" y="1408" width="128" height="128"/>
+  <object id="4" gid="2" x="256" y="1408" width="128" height="128"/>
+  <object id="5" gid="2" x="384" y="1408" width="128" height="128"/>
+  <object id="6" gid="2" x="512" y="1408" width="128" height="128"/>
+  <object id="7" gid="2" x="640" y="1408" width="128" height="128"/>
+  <object id="8" gid="2" x="768" y="1408" width="128" height="128"/>
+  <object id="9" gid="2" x="896" y="1408" width="128" height="128"/>
+  <object id="10" gid="2" x="1024" y="1408" width="128" height="128"/>
+  <object id="11" gid="2" x="1152" y="1408" width="128" height="128"/>
+  <object id="12" gid="2" x="1280" y="1408" width="128" height="128"/>
+  <object id="13" gid="2" x="1408" y="1408" width="128" height="128"/>
+  <object id="14" gid="2" x="1536" y="1408" width="128" height="128"/>
+  <object id="15" gid="2" x="1664" y="1408" width="128" height="128"/>
+  <object id="16" gid="2" x="1792" y="1408" width="128" height="128"/>
+  <object id="17" gid="2" x="1920" y="1408" width="128" height="128"/>
+  <object id="18" gid="2" x="2176" y="1408" width="128" height="128"/>
+  <object id="19" gid="2" x="2176" y="1408" width="128" height="128"/>
+  <object id="20" gid="2" x="2048" y="1408" width="128" height="128"/>
+  <object id="21" gid="2" x="2304" y="1408" width="128" height="128"/>
+  <object id="22" gid="2" x="2432" y="1408" width="128" height="128"/>
+  <object id="23" gid="2" x="2560" y="1408" width="128" height="128"/>
+  <object id="24" gid="2" x="2688" y="1408" width="128" height="128"/>
+  <object id="25" gid="2" x="2816" y="1408" width="128" height="128"/>
+  <object id="26" gid="2" x="2944" y="1408" width="128" height="128"/>
+  <object id="27" gid="2" x="3072" y="1408" width="128" height="128"/>
+  <object id="28" gid="3" x="3200" y="1408" width="128" height="128"/>
+  <object id="29" gid="4" x="0" y="1536" width="128" height="128"/>
+  <object id="30" gid="6" x="3200" y="1536" width="128" height="128"/>
+  <object id="31" gid="5" x="128" y="1536" width="128" height="128"/>
+  <object id="32" gid="5" x="384" y="1536" width="128" height="128"/>
+  <object id="33" gid="5" x="256" y="1536" width="128" height="128"/>
+  <object id="34" gid="5" x="512" y="1536" width="128" height="128"/>
+  <object id="35" gid="5" x="640" y="1536" width="128" height="128"/>
+  <object id="36" gid="5" x="768" y="1536" width="128" height="128"/>
+  <object id="37" gid="5" x="896" y="1536" width="128" height="128"/>
+  <object id="38" gid="5" x="1152" y="1536" width="128" height="128"/>
+  <object id="39" gid="5" x="1152" y="1536" width="128" height="128"/>
+  <object id="40" gid="5" x="1024" y="1536" width="128" height="128"/>
+  <object id="41" gid="5" x="1280" y="1536" width="128" height="128"/>
+  <object id="42" gid="5" x="1408" y="1536" width="128" height="128"/>
+  <object id="43" gid="5" x="1536" y="1536" width="128" height="128"/>
+  <object id="44" gid="5" x="1664" y="1536" width="128" height="128"/>
+  <object id="45" gid="5" x="1792" y="1536" width="128" height="128"/>
+  <object id="46" gid="5" x="1920" y="1536" width="128" height="128"/>
+  <object id="47" gid="5" x="2048" y="1536" width="128" height="128"/>
+  <object id="48" gid="5" x="2176" y="1536" width="128" height="128"/>
+  <object id="49" gid="5" x="2304" y="1536" width="128" height="128"/>
+  <object id="50" gid="5" x="2432" y="1536" width="128" height="128"/>
+  <object id="51" gid="5" x="2688" y="1536" width="128" height="128"/>
+  <object id="52" gid="5" x="2560" y="1536" width="128" height="128"/>
+  <object id="53" gid="5" x="2816" y="1536" width="128" height="128"/>
+  <object id="54" gid="5" x="2944" y="1536" width="128" height="128"/>
+  <object id="55" gid="5" x="3072" y="1536" width="128" height="128"/>
+  <object id="56" gid="10" x="256" y="1280" width="128" height="128"/>
+  <object id="59" gid="10" x="1920" y="1280" width="128" height="128"/>
+  <object id="60" gid="10" x="2432" y="1280" width="128" height="128"/>
+  <object id="61" gid="10" x="3328" y="1152" width="128" height="128"/>
+  <object id="63" gid="7" x="512" y="1024" width="128" height="128"/>
+  <object id="64" gid="9" x="1408" y="1024" width="128" height="128"/>
+  <object id="65" gid="8" x="640" y="1024" width="128" height="128"/>
+  <object id="66" gid="8" x="768" y="1024" width="128" height="128"/>
+  <object id="67" gid="8" x="896" y="1024" width="128" height="128"/>
+  <object id="68" gid="8" x="1024" y="1024" width="128" height="128"/>
+  <object id="69" gid="8" x="1152" y="1024" width="128" height="128"/>
+  <object id="70" gid="8" x="1280" y="1024" width="128" height="128"/>
+  <object id="71" gid="1" x="3456" y="1408" width="128" height="128"/>
+  <object id="72" gid="4" x="3456" y="1536" width="128" height="128"/>
+  <object id="73" gid="2" x="3584" y="1408" width="128" height="128"/>
+  <object id="74" gid="2" x="3712" y="1408" width="128" height="128"/>
+  <object id="75" gid="2" x="3840" y="1408" width="128" height="128"/>
+  <object id="76" gid="2" x="3968" y="1408" width="128" height="128"/>
+  <object id="77" gid="2" x="4096" y="1408" width="128" height="128"/>
+  <object id="78" gid="2" x="4224" y="1408" width="128" height="128"/>
+  <object id="79" gid="3" x="4352" y="1408" width="128" height="128"/>
+  <object id="80" gid="6" x="4352" y="1536" width="128" height="128"/>
+  <object id="81" gid="5" x="3584" y="1536" width="128" height="128"/>
+  <object id="82" gid="5" x="3712" y="1536" width="128" height="128"/>
+  <object id="83" gid="5" x="3840" y="1536" width="128" height="128"/>
+  <object id="85" gid="5" x="3968" y="1536" width="128" height="128"/>
+  <object id="86" gid="5" x="4096" y="1536" width="128" height="128"/>
+  <object id="87" gid="5" x="4224" y="1536" width="128" height="128"/>
+  <object id="88" gid="7" x="3840" y="1024" width="128" height="128"/>
+  <object id="89" gid="8" x="3968" y="1024" width="128" height="128"/>
+  <object id="90" gid="8" x="4096" y="1024" width="128" height="128"/>
+  <object id="91" gid="8" x="4224" y="1024" width="128" height="128"/>
+  <object id="92" gid="8" x="4352" y="1024" width="128" height="128"/>
+  <object id="93" gid="8" x="4480" y="1024" width="128" height="128"/>
+  <object id="94" gid="8" x="4608" y="1024" width="128" height="128"/>
+  <object id="95" gid="8" x="4736" y="1024" width="128" height="128"/>
+  <object id="96" gid="8" x="4864" y="1024" width="128" height="128"/>
+  <object id="97" gid="9" x="4992" y="1024" width="128" height="128"/>
+  <object id="98" gid="12" x="4736" y="896" width="128" height="128"/>
+  <object id="99" gid="11" x="128" y="1280" width="256" height="128"/>
+  <object id="100" gid="11" x="640" y="896" width="384" height="128"/>
+  <object id="101" gid="11" x="512" y="1280" width="384" height="128"/>
+  <object id="102" gid="11" x="1152" y="896" width="384" height="128"/>
+  <object id="103" gid="11" x="1152" y="1280" width="384" height="128"/>
+  <object id="104" gid="11" x="1792" y="1280" width="512" height="128"/>
+  <object id="105" gid="11" x="2816" y="1280" width="384" height="128"/>
+  <object id="106" gid="11" x="3840" y="1280" width="512" height="128"/>
+  <object id="107" gid="11" x="3840" y="896" width="384" height="128"/>
+  <object id="108" gid="10" x="3712" y="1280" width="128" height="128"/>
+  <object id="109" gid="10" x="4352" y="1280" width="128" height="128"/>
+  <object id="110" gid="10" x="512" y="896" width="128" height="128"/>
+  <object id="111" gid="10" x="896" y="1280" width="128" height="128"/>
+  <object id="112" gid="10" x="1664" y="1280" width="128" height="128"/>
+  <object id="113" gid="10" x="4352" y="896" width="128" height="128"/>
+ </objectgroup>
+</map>

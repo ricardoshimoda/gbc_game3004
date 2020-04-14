@@ -5,7 +5,7 @@ class FightScene: BaseScene {
     
     var isOn = true
     
-    let bgMusic[SKAudioNode] = [
+    let bgMusic:[SKAudioNode] = [
         SKAudioNode(fileNamed: "Sounds/Fight/Ryu.mp3"),
         SKAudioNode(fileNamed: "Sounds/Fight/ChunLi.mp3"),
         SKAudioNode(fileNamed: "Sounds/Fight/Blanka.mp3"),
